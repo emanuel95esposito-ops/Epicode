@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms, tabelle e contenitori</title>
+</head>
+<style>
+    span {
+        color:red;
+    }
+</style>
+
+    <body>
+<!-- Blocco header/nav -->
+    <header>
+        <!-- Percorso RELATIVO dell'immagine -->
+         <div id="logo">    
+        <img src="assets-img/logo-epicode.jpg" alt="Logo Epicode" width="10%"
+            />
+        </div>
+        <div id="title">        
+        <h1>Tabelle,forms e contenitori</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Tabelle</a></li>
+                <li><a href="forms.html">Forms</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr />
+<!-- Blocco main -->
+<main>
+    <section>
+    <article>
+    <!-- Form semplice GET/POST -->
+    <form action="grazie.html" method="get">
+        <!-- Il metodo get non ha limiti di quantità di dati ma invia i dati in chiaro, il metodo post ha un
+        limite a 256kb ma non invia i dati in chiaro -->
+        
+        <label for="nome">Nome utente</label>
+        <input type="text" placeholder="nome" id="nome" name="nome" />
+
+        <label for="password">Password</label>
+        <input
+            type="password"
+            placeholder="password"
+            id="password"
+            name="password"
+        />
+
+        <button type="submit">INVIA</button>
+    </article>
+    </form>
+
+    <hr />
+    <article>
+    <!-- Form completo -->
+    <form action="grazie.html" method="get">
+        <h2>Registrazione utente</h2>
+
+        <!-- Dati anagrafici -->
+        <fieldset>
+            <legend>Anagrafica</legend>
+
+            <label for="completeName">Nome completo</label>
+            <input
+            type="text"
+            placeholder="Inserisci il nome completo in formato Nome Cognome"
+            id="completeName"
+            title="Inserisci il nome completo in formato Nome Cognome"
+            name="completeName"
+            />
+
+            <label for="birthDate">Data di nascita</label>
+            <input type="date" id="birthDate" name="birthDate" />
+
+            <br /><br />
+
+            <label for="address">Indirizzo</label>
+            <br />
+
+            <textarea
+            name="address"
+            id="address"
+            rows="5"
+            cols="80"
+            >
+            </textarea>
+
+            <br /><br />
+
+            <label for="userEmail">Email</label>
+            <input
+            type="email"
+            id="userEmail"
+            name="userEmail"
+            placeholder="Inserisci una email valida"
+            />
+
+            <label for="cellPhone">Cellulare</label>
+            <input
+            type="number"
+            placeholder="Inserisci il numero di cellulare"
+            id="cellPhone"
+            name="cellPhone"
+            />
+        </fieldset>
+        <fieldset>
+            <legend>Dati di registrazione</legend>
+
+            <label for="userName">Nome utente</label>
+            <input
+            type="text"
+            placeholder="Scegli un nome utente"
+            title="Scegli un nome utente"
+            id="userName"
+            name="userName"
+            />
+
+            <label for="userPass">Password</label>
+            <input
+            type="password"
+            placeholder="Scegli ua password"
+            title="Scegli ua password"
+            id="userPass"
+            name="userPass"
+            required
+            />
+
+            <p>&nbsp;</p>
+
+            <label for="numberDays">Giorni disponibili</label>
+            <input type="number" id="numberDays" name="numberDays" />
+
+            <br />
+
+            <label for="course">Scelta corso</label>
+            <select id="course" name="course">
+            <option value="selected"></option>
+            <option value="FE">Front End</option>
+            <option value="BE">Back End</option>
+            <option value="FS">Full Stack</option>
+            </select>
+            <p>Linguaggi conosciuti</p>
+
+            <input type="checkbox" id="HTML" name="HTML" />
+            <label for="HTML">HTML</label><br />
+
+            <input type="checkbox" id="CSS" name="CSS" />
+            <label for="CSS">CSS</label><br />
+
+            <input type="checkbox" id="JavaScript" name="JavaScript" />
+            <label for="JavaScript">JavaScript</label><br /><br />
+
+            <p>Fascia oraria</p>
+
+            <input 
+            type="radio" 
+            id="full" 
+            value="full" 
+            name="preferredTime" 
+            />
+            <label for="full">Full time</label><br />
+
+            <input type="radio" id="part" value="part" name="preferredTime" />
+            <label for="part">Part time</label><br />
+
+            <input type="radio" id="serale" value="serale" name="preferredTime" />
+            <label for="serale">Serale</label><br />
+
+        </fieldset>
+        <br />
+
+        <button type="submit" id="sendForm">INVIA</button>
+        <button type="reset">CANCELLA</button>
+
+    </form>
+    </article>
+    </section>
+</main>
+    <aside>
+        <figure>
+        <img 
+            src="https://media.istockphoto.com/id/1488294044/it/foto/luomo-daffari-lavora-sul-laptop-visualizzazione-della-dashboard-di-analisi-aziendale-con.jpg?b=1&s=612x612&w=0&k=20&c=OOBHkdNaJ-Af17sQ6Xn5Mi1kRw4B-BiVuhpvaaejXpA=" 
+            alt="Immagine da Pexel.com" 
+            width="10%" 
+        />
+        <figcaption>Immagine da pexels.com</figcaption>
+        </figure>
+        <table>
+            <tr>
+                <td>
+                    <figure>
+                        <img 
+                            src="assets-img/logo-epicode.jpg"
+                            width="30%"
+                        />
+                        <figcaption>Logo Epicode</figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <figure>
+                        <img 
+                            src="assets-img/logo-epicode.jpg"
+                            width="30%"
+                        />
+                        <figcaption>Logo Epicode</figcaption>
+                    </figure>
+                </td>
+                <td>
+                    <figure>
+                        <img 
+                            src="assets-img/logo-epicode.jpg"
+                            width="30%"
+                        />
+                        <figcaption>Logo Epicode</figcaption>
+                    </figure>
+                </td>
+            </tr>
+        </table>
+        <!-- Video YouTube -->
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/-cCM1MK59Nw?si=dBcAsgtlVep5FYOE" 
+         title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+         gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <p>in questo testo <span>UN SOLO ELEMENTO</span> ha un testo diverso</p>
+    </aside>
+    </body>
+</html>

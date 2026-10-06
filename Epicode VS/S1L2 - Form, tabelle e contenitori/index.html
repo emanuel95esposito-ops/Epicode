@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms, tabelle e contenitori</title>
+</head>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    td, th {
+        border: 2px solid black;
+    }
+
+    #bigger {
+        font-size: larger;
+        font-weight: bold;
+    }
+
+</style>
+
+<body>
+    <!-- Blocco header/nav -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Tabelle</a></li>
+                <li><a href="forms.html">Forms</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Blocco main -->
+    <main>
+        <!-- Tabella main -->
+        <table>
+            <tbody>
+                <tr>
+                    <td>Prima cella</td>
+                    <td>Seconda cella</td>
+                    <td>Terza cella</td>
+                </tr>
+                <tr>
+                    <td>Prima cella seconda riga</td>
+                    <td id="bigger">Seconda cella seconda riga</td>
+                    <td>Terza cella seconda riga</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr />
+        <!-- Tabella Completa-->
+        <h2>Tabella Completa</h2>
+        <table>
+            <caption>I miei progetti</caption>
+            <thead>
+                <tr>
+                    <th>Anno</th>
+                    <th>Progetto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2025</td>
+                    <td>Portfolio</td>
+                </tr>
+                <tr>
+                    <td>2026</td>
+                    <td>Web App</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Totale Progetti: 
+                        2 Progetti totali in pochi mesi di lavoro
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <hr />
+        <!-- Tabella Complessa-->
+        <h2>Tabella Complessa</h2>
+        <table>
+            <caption>Elenco Corsi</caption>
+            <thead>
+                <tr>
+                    <th>Corso</th>
+                    <th>Materia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">FRONT-END</td>
+                    <td>HTML</td>
+                </tr>
+                <tr>
+                    <td>CSS</td>
+                </tr>
+                <tr>
+                    <td>JavaScript</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">BACK-END</td>
+                    <td>Java</td>
+                </tr>
+                <tr>
+                    <td>WebServer</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Totale materie: 5</td>
+                </tr>
+            </tfoot>
+
+    </main>
+    
+</body>
+</html>

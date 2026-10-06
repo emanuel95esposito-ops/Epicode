@@ -32,6 +32,7 @@
             <article>
                 <div id="photo">
                     <img src="assets-img/foto-emanuel-esposito.png" alt="Foto Emanuel"/>
+                    <figcaption>Emanuel Esposito</figcaption>
                 </div>
 
                 <div id="title">
@@ -102,6 +103,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <br />
                 <a href="#top">Torna al menu</a>
             </article>
             <hr />
@@ -129,6 +131,7 @@
                     <p>Ho creato una copia della HomePage di YouTube</p>
                     <a href="https://github.com/emanuel95esposito-ops/Epicode/blob/main/YouTube%20Clone/index.html" target="_blank">Vedi su GitHub</a></li>
                 </div>
+                <br />
                 <a href="#top">Torna al menu</a>
             </article>
             <hr />
@@ -152,6 +155,7 @@
                             id="Name"
                             title="Il tuo nome"
                             name="Name"
+                            required
                         />
                 </div>
                 <br />
@@ -163,7 +167,19 @@
                             id="userEmail"
                             name="userEmail"
                             placeholder="Inserisci una email valida"
+                            required
                         />
+                </div>
+                <br />
+                <div>
+                    <label for="motivo">Motivo del contatto</label>
+                    <br />
+                        <select id="motivo" name="motivo" required>
+                        <option value="lavoro">Proposta di lavoro</option>
+                        <option value="collaborazione">Collaborazione su un progetto</option>
+                        <option value="info">Richiesta di informazioni</option>
+                        <option value="altro">Altro</option>
+                    </select>
                 </div>
                 <br />
                 <div>
@@ -178,13 +194,13 @@
                 <div>
                     <label for="message">Messaggio</label>
                     <br />
-
                         <textarea
                             id="message"
                             name="message"
                             rows="4"
                             cols="25"
                             placeholder="Scrivi qui il tuo messaggio..."
+                            required
                         ></textarea>
                     </div>
                 <br />
@@ -193,6 +209,7 @@
                         type="checkbox"
                         id="contactConsent"
                         name="contactConsent"
+                        required
                     />
                     <label for="contactConsent">
                     Accetto di essere ricontattato all'indirizzo indicato
@@ -200,9 +217,11 @@
                 </div>
                 <br />
                 <div>
-                    <button type="submit">Invia</button>
+                    <button 
+                        type="submit">Invia</button>
                 </div>
             </form>
+            <br />
             <a href="#top">Torna al menu</a>
         </aside>
     </main>

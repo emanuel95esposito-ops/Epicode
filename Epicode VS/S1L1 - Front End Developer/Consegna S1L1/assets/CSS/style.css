@@ -85,17 +85,14 @@ h3 {
 }
 
 
-/* =========================
-   FORM
-   ========================= */
-
 label {
     font-weight: bold;
     color: #1F3D7A;
 }
 
-
-input, textarea, select {
+input,
+textarea,
+select {
 
     font-family: "Helvetica Neue", Arial, sans-serif;
     font-size: 1rem;
@@ -103,17 +100,16 @@ input, textarea, select {
     background-color: #F5F7FB;
 }
 
-
-input:focus, textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
     background-color: #232323;
     color: #ffffff;
 }
 
-
 input[type="checkbox"] {
     width: auto;
 }
-
 
 button {
     color: #ffffff;
@@ -121,7 +117,6 @@ button {
     font-weight: bold;
     width: 30%;
 }
-
 
 button:hover {
     background-color: hsl(220, 60%, 45%);
@@ -134,4 +129,3 @@ button:hover {
     text-align: center;
     font-size: 0.9rem;
 }
-

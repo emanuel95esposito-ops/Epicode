@@ -1,0 +1,137 @@
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333333;
+    background-color: #f7f7f7;
+}
+
+#site-header {
+    background-image: url("../IMG/header-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    text-align: center;
+}
+
+#site-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.tagline {
+    color: #F44A4A;
+    font-style: italic;
+}
+
+nav a {
+    color: hsl(67, 98%, 26%);
+    font-weight: bold;
+    line-height: 3;
+}
+
+nav a:hover {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #1F3D7A;
+    text-align: left;
+}
+
+
+h3 {
+    font-size: 1.1rem;
+    color: #1F3D7A;
+    text-align: left;
+}
+
+#chi-sono {
+    background-color: #ffffff;
+    text-align: justify;
+}
+
+#chi-sono p:first-of-type {
+    font-size: 1.10rem;
+    font-style: italic;
+    color: #35415b;
+}
+
+.skill-list li:nth-child(odd) {
+    background-color: #F5F7FB;
+}
+
+
+.skill-list li:nth-child(even) {
+    background-color: #ffffff;
+}
+
+
+.skill-list li:first-child {
+    font-weight: bold;
+}
+
+
+.project:nth-of-type(odd) {
+    background-color: #fffaf0;
+}
+
+
+.project:nth-of-type(even) {
+    background-color: #ffffff;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+label {
+    font-weight: bold;
+    color: #1F3D7A;
+}
+
+
+input, textarea, select {
+
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    width: 60%;
+    background-color: #F5F7FB;
+}
+
+
+input:focus, textarea:focus, select:focus {
+    background-color: #232323;
+    color: #ffffff;
+}
+
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+
+button {
+    color: #ffffff;
+    background-color: hsl(220, 60%, 30%);
+    font-weight: bold;
+    width: 30%;
+}
+
+
+button:hover {
+    background-color: hsl(220, 60%, 45%);
+    color: #ffffff;
+}
+
+#site-footer {
+    background-color: #172136;
+    color: #ffffff;
+    text-align: center;
+    font-size: 0.9rem;
+}
+

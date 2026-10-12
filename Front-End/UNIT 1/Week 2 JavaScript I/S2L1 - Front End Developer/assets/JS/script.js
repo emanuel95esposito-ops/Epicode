@@ -26,12 +26,12 @@ console.log(`Ciao, mi chiamo ${NOME} ${COGNOME}`);
 
 const a = 10;
 const b = 3;
-console.log(`${a} + ${b} = ${a+b}`);
-console.log(`${a} - ${b} = ${a-b}`);
-console.log(`${a} * ${b} = ${a*b}`);
-console.log(`${a} / ${b} = ${a/b}`);
-console.log(`${a} % ${b} = ${a%b}`);
-console.log(`${a} ** ${b} = ${a**b}`);
+console.log(`${a} + ${b} = ${a + b}`);
+console.log(`${a} - ${b} = ${a - b}`);
+console.log(`${a} * ${b} = ${a * b}`);
+console.log(`${a} / ${b} = ${a / b}`);
+console.log(`${a} % ${b} = ${a % b}`);
+console.log(`${a} ** ${b} = ${a ** b}`);
 
 
 /* ESERCIZIO 3 — Età nel tempo
@@ -45,9 +45,9 @@ console.log(`${a} ** ${b} = ${a**b}`);
 
 const annoNascita = 1995;
 const annoCorrente = 2026;
-console.log(`Oggi hai ${annoCorrente-annoNascita} anni`);
-console.log(`Tra 10 anni avrai ${annoCorrente-annoNascita+10} anni`);
-console.log(`5 anni fà avevi ${annoCorrente-annoNascita-5} anni`);
+console.log(`Oggi hai ${annoCorrente - annoNascita} anni`);
+console.log(`Tra 10 anni avrai ${(annoCorrente - annoNascita) + 10} anni`);
+console.log(`5 anni fà avevi ${(annoCorrente - annoNascita) - 5} anni`);
 
 
 /* ESERCIZIO 4 — Maggiorenne?
@@ -74,11 +74,11 @@ console.log(`Età: ${eta} - Maggiorenne: ${maggiorenne}`);
 /* SCRIVI QUI LA TUA RISPOSTA */
 let myEmpty = null;
 let calcolatrice;
-console.log(`NOME è di tipo: ${typeof NOME}`);
-console.log(`annoNascita è di tipo: ${typeof annoNascita}`);
-console.log(`maggiorenne è di tipo: ${typeof maggiorenne}`);
-console.log(`myEmpty è di tipo: ${typeof myEmpty}`); // Bug Storico di JavaScript, restituisce object anzichè null.
-console.log(`calcolatrice è di tipo: ${typeof calcolatrice}`);
+console.log(`La variabile ${NOME} è di tipo: ${typeof NOME}`);
+console.log(`La variabile  ${annoNascita} è di tipo: ${typeof annoNascita}`);
+console.log(`La variabile ${maggiorenne} è di tipo: ${typeof maggiorenne}`);
+console.log(`La variabile ${myEmpty} è di tipo: ${typeof myEmpty}`); // Bug Storico di JavaScript, restituisce object anzichè null.
+console.log(`La variabile ${calcolatrice} è di tipo: ${typeof calcolatrice}`);
 
 
 /* ESERCIZIO 6 — === vs ==
@@ -120,7 +120,8 @@ console.log(`Le due variabili hanno tipo e valore identico? ${numero === stringa
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
-let n = 12;
+let n;
+n = 12;
 
 console.log(`n è pari: ${n % 2 === 0}`);
 console.log(`n è divisibile per 3: ${n % 3 === 0}`);

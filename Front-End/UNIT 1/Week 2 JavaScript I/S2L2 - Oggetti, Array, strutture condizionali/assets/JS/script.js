@@ -1,242 +1,220 @@
+/*
+REGOLE
+- Le risposte vanno scritte in JavaScript sotto ogni commento.
+- Puoi testare aprendo index.html nel browser e guardando la console (DevTools).
+- In alternativa: nel terminale, `node script.js`.
+- Cerca solo cose non viste a lezione. Tutto il necessario è già stato spiegato stamattina.
+*/
+
+/* ESERCIZIO 1 — Oggetto persona
+   Crea un oggetto 'persona' con: nome, cognome, eta, citta.
+   Stampa: 'Mario Rossi, 25 anni, vive a Roma.'
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */
 const persona = {
     nome: 'Mario',
     cognome: 'Rossi',
     eta: 25,
-    attivo: true,
-    'corso scelto': 'FS0326'
+    citta: 'Roma'
 };
 
-console.log(persona);
+console.log(`${persona.nome} ${persona.cognome}, ${persona.eta} anni, vive a ${persona.citta}.`);
 
 const myPerson = document.getElementById('myPerson');
-myPerson.innerText = `${persona.nome} ${persona.cognome} di anni ${persona.eta}`;
+myPerson.innerText = `${persona.nome} ${persona.cognome}, di anni ${persona.eta}, vive a ${persona.citta}.`;
 
-persona.nome = 'Maria';
-console.log(persona);
-document.getElementById('myPerson2').innerText = `${persona.nome} ${persona.cognome} di anni ${persona.eta}`;
+/* ESERCIZIO 2 — Aggiungi e rimuovi
+   Sull'oggetto 'persona': aggiungi 'email', poi rimuovi 'eta'.
+   Stampa l'oggetto risultante.
+*/
 
-persona.eta = 38;
-console.log(persona);
-document.getElementById('myPerson3').innerText = `${persona.nome} ${persona.cognome} di anni ${persona.eta}`;
-
-console.log(persona.nome, persona.cognome);
-
-persona.eta = 32;
-console.log(persona);
-
-persona.citta = 'Roma';
-console.log(persona);
-
-delete persona.attivo;
-console.log(persona);
-
-console.log(persona['corso scelto']);
-
-delete persona.citta;
-
-persona.indirizzo = {
-    via: 'Roma',
-    civico: 20,
-    citta: 'Napoli'
-}
-
-console.log(persona);
-
-const disco = {
-    titolo: 'The dark side of the moon',
-    autore: 'Pink Floyd',
-    anno: 1973,
-    caseDisc: {
-        europa: 'RCA',
-        USA: 'Columbia',
-        sudamerica: 'CBS'
-    },
-    genere: 'progressive'
-}
-
-console.log(disco);
-
-console.log(disco.caseDisc.USA);
-
-console.log(Object.hasOwn(persona, 'scuola'));
-console.log(Object.hasOwn(persona, 'nome'));
-
+/* SCRIVI QUI LA TUA RISPOSTA */
+persona.email = 'mariorossi@gmail.com';
 delete persona.eta;
 
-persona.anno = 1980;
-let annoCorrente = 2026;
+console.log(`${persona.nome} ${persona.cognome}, vive a ${persona.citta}, email ${persona.email}`);
 
-persona.eta = annoCorrente - persona.anno;
+document.getElementById('myPerson2').innerText = `${persona.nome} ${persona.cognome}, vive a ${persona.citta}, email ${persona.email}.`;
 
-console.log(persona);
+/* ESERCIZIO 3 — Oggetto annidato
+   Oggetto 'utente' con una proprietà 'indirizzo' (oggetto con via, citta, cap).
+   Stampa solo il CAP con dot notation.
+*/
 
-console.log('-------------------');
+/* SCRIVI QUI LA TUA RISPOSTA */
 
-const mesi = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile'];
-console.log(mesi);
-
-const myArray = document.getElementById('myArray');
-myArray.innerText = mesi;
-
-const number = [10, 2, 43, 24, 51, 76];
-
-const student = ['Aldo', 'Bianchi', 30, true];
-
-console.table(persona);
-console.table(mesi);
-
-console.log(mesi[0]);
-console.log(mesi.length);
-console.log(mesi[mesi.length - 1]);
-console.log(mesi.at(-1));
-
-student[1] = 'verdi';
-console.log(student);
-
-console.log(number.at(4));
-
-number[number.lenght] = 18;
-console.log(number);
-
-number[number.lenght] = [3, 67, 21];
-console.log(number);
-
-const newStudent = student.with(0, 'Giovanna');
-console.log(student, newStudent);
-
-mesi.push('Maggio');
-console.log(mesi);
-
-let rimosso = mesi.pop();
-console.log(mesi, `Mese rimosso: ${rimosso}`);
-
-mesi.unshift('Dicembre');
-console.log(mesi);
-
-let rimosso2 = mesi.shift();
-console.log(mesi, `Mese rimosso: ${rimosso2}`);
-
-const names = ['Alessandro', 'Federico', 'Francesca', 'Miriam', 'Giuseppe'];
-console.log(names);
-
-names.splice(1, 2);
-console.log(names);
-
-names.splice(0, 0, 'Fabio', 'Lisa');
-console.log(names);
-
-names.splice(1, 1, 'Gabriele', 'Laura', 'Mattia');
-console.log(names);
-
-const newNames = names.toSpliced(0, names.length / 2);
-console.log(newNames);
-
-const students = [
-    {
-        nome: 'Mario',
-        cognome: 'Rossi'
-    },
-    {
-        nome: 'Aldo',
-        cognome: 'Bianchi'
-    },
-    {
-        nome: 'Giovanna',
-        cognome: 'Neri'
-    },
-];
-
-console.log(students);
-console.log(students[1].cognome); // Prendi il valore della proprietà 'cognome' dell'oggetto in posizione 1 nell'Array students
-
-const prodotti = [
-    {
-        nome: 'Penna',
-        prezzo: 1.5,
-        disponibile: true,
-    },
-    {
-        nome: 'Quaderno',
-        prezzo: 4.0,
-        disponibile: false,
-    },
-];
-
-console.log(`Abbiamo ${prodotti.length} prodotti`);
-
-prodotti.push({
-    nome: 'Astuccio',
-    prezzo: 12.0,
-    disponibile: true,
-});
-
-console.log(`Abbiamo ${prodotti.length} prodotti`);
-
-names.sort();
-console.log(names);
-
-names.reverse();
-console.log(names);
-
-number.sort();
-console.log(number);
-
-number.reverse();
-console.log(number);
-
-// Cambiare prezzo di un oggetto: Quaderno
-// Cambiare prezzo di un oggetto: Quaderno
-for (let i = 0; i < prodotti.length; i++) {
-    if (prodotti[i].nome === 'Quaderno') {
-        prodotti[i].prezzo = 12.0;
+const utente = {
+    indirizzo: {
+        via: 'Giuseppe Avezzana 4',
+        citta: 'Genova',
+        cap: 16134
     }
-}
+};
 
-console.log(prodotti);
+console.log(utente.indirizzo.cap);
 
-console.log('---------------');
+/* ESERCIZIO 4 — Bracket dinamica
+   Sull'oggetto 'persona', variabile chiave = 'nome'.
+   Stampa il valore con bracket notation usando la variabile chiave.
+*/
 
-let voto = 24;
-let iscritto = true;
+/* SCRIVI QUI LA TUA RISPOSTA */
 
-if (voto >= 26) {
-    console.log('Ottimo');
-} else if (voto > 20) {
-    console.log('Buono');
+const chiave = 'nome';
+console.log(persona[chiave]);
+
+/* ESERCIZIO 5 — Numero più grande
+   Tre numeri a, b, c.
+   Con if/else if, stampa il più grande. Se pareggio al massimo, stampa 'Pareggio'.
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+let a = 15;
+let b = 20;
+let c = 25;
+
+if (a === b && a >= c) {
+    console.log('Pareggio');
+} else if (a === c && a >= b) {
+    console.log('Pareggio');
+} else if (b === c && b >= a) {
+    console.log('Pareggio');
+} else if (a > b && a > c) {
+    console.log(`Il numero maggiore è ${a}`);
+} else if (b > a && b > c) {
+    console.log(`Il numero maggiore è ${b}`);
 } else {
-    console.log('Sufficiente');
+    console.log(`Il numero maggiore è ${c}`);
 }
 
-let myAge = 14;
-const myState =
-    myAge >= 18
-        ? `Hai ${myAge} anni, sei maggiorenne`
-        : `Hai ${myAge} anni, sei minorenne`;
-console.log(myState);
+/* ESERCIZIO 6 — E-commerce: spedizione
+   Variabile 'totale'.
+   Se totale >= 50 spedizione gratuita, altrimenti 9.90.
+   Stampa: 'Totale carrello: 35€ — Spedizione: 9.90€ — Totale finale: 44.90€'
+   Risolvi una volta con if/else e una volta con ternario.
+*/
 
-if (iscritto) {
-    if (voto >= 26) {
-        console.log('Ottimo');
-    } else if (voto > 20) {
-        console.log('Buono');
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+let totale = 35;
+let spedizione;
+
+if (totale >= 50) {
+    spedizione = 0;
+} else {
+    spedizione = 9.90;
+}
+
+let totaleFinale = totale + spedizione;
+
+console.log(`Totale carrello: ${totale}€ — Spedizione: ${spedizione}€ — Totale finale: ${totaleFinale}€`);
+
+/* TERNARIO */
+
+let totale2 = 55; //* prova di importo totale maggiore
+
+let spedizione2 = totale2 >= 50 ? 0 : 9.90;
+
+let totaleFinale2 = totale2 + spedizione2;
+
+console.log(`Totale carrello: ${totale2}€ — Spedizione: ${spedizione2}€ — Totale finale: ${totaleFinale2}€`);
+
+/* ESERCIZIO 7 — typeof check
+   Crea un array con 3 valori diversi (es. [42, 'ciao', true]).
+   Con un for + if, per ogni elemento stampa 'x è un numero' o 'x non è un numero'.
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+const valori = [42, 'ciao', true];
+
+for (let i = 0; i < valori.length; i++) {
+    if (typeof valori[i] === 'number') {
+        console.log(`${valori[i]} è un numero`);
     } else {
-        console.log('Sufficiente');
+        console.log(`${valori[i]} non è un numero`);
     }
-} else {
-    console.log('Non può sostenere l\'esame');
 }
 
-let num1 = 12;
-let num2 = 28;
+/* ESERCIZIO 8 — Array dei numeri
+   Array vuoto. Aggiungi 1..5 con push. Aggiungi 0 all'inizio con unshift.
+   Stampa array e length.
+*/
 
-if (num1 = num2) { //ERRORE! = è un operatore di assegnazione, per cui con questa riga num2 diventa UGUALE a num1. Sintassi corretta: if (num1===num2)
-    console.log('num1 e num2 sono uguali');
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+const numeri = [];
+
+numeri.push(1, 2, 3, 4, 5);
+numeri.unshift(0);
+
+console.log(numeri);
+console.log(numeri.length);
+
+
+/* ESERCIZIO 9 — Carrello con splice
+   Array ['Penna', 'Quaderno', 'Zaino', 'Astuccio'].
+   Con splice: rimuovi 'Quaderno', poi inserisci 'Diario' al suo posto.
+   Stampa dopo ogni operazione.
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+const carrello = ['Penna', 'Quaderno', 'Zaino', 'Astuccio'];
+
+carrello.splice(1, 1);
+console.log(carrello);
+
+carrello.splice(1, 0, 'Diario');
+console.log(carrello);
+
+
+/* ESERCIZIO 10 — Cerca un articolo
+   Array prodotti = ['Penna', 'Quaderno', 'Zaino'].
+   cercato = 'Zaino'.
+   Con includes: stampa 'Zaino è in carrello: true'.
+   Con indexOf: stampa la posizione, o 'Non in carrello'.
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+const prodotti = ['Penna', 'Quaderno', 'Zaino'];
+const cercato = 'Zaino';
+
+console.log(`${cercato} è in carrello: ${prodotti.includes(cercato)}`);
+
+if (prodotti.indexOf(cercato) !== -1) {
+    console.log(`Posizione: ${prodotti.indexOf(cercato)}`);
 } else {
-    console.log('num1 e num2 sono diversi');
+    console.log('Non in carrello');
 }
 
-if (num1 === num2) {
-    console.log('num1 e num2 sono uguali');
-} else {
-    console.log('num1 e num2 sono diversi');
-}
+
+/* ESERCIZIO 11 — Lista utenti
+   Array utenti di 3 oggetti { nome, eta }.
+   Con un for, stampa ogni utente: 'Mario (25 anni)'.
+   Aggiungi console.table(utenti) alla fine.
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+/* ESERCIZIO 12 — Inventario disponibili
+   Array prodotti di 4 oggetti { nome, prezzo, disponibile }.
+   Con for, per ogni prodotto:
+   - disponibile && prezzo < 10 → 'OFFERTA: nome (prezzo€)'
+   - disponibile && prezzo >= 10 → 'nome — prezzo€'
+   - !disponibile → 'nome — esaurito'
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+/* --EXTRA-- ESERCIZIO 13 — Reverse manuale
+   Array [1, 2, 3, 4, 5].
+   Nuovo array 'inverso', riempilo con un for (dall'ultimo al primo) usando push.
+   Stampa 'inverso'.
+   Vincolo: niente metodo .reverse() di JavaScript.
+*/
+
+/* SCRIVI QUI LA TUA RISPOSTA */

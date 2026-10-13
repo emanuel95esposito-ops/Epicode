@@ -136,3 +136,19 @@ console.log(`n è pari E divisibile per 3: ${n % 2 === 0 && n % 3 === 0}`);
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+
+const lato1 = 5;
+const lato2 = 5;
+const lato3 = 5;
+const perimetro = lato1 + lato2 + lato3;
+
+let tipo;
+if (lato1 === lato2 && lato2 === lato3) {
+  tipo = "equilatero";
+} else if (lato1 === lato2 || lato2 === lato3 || lato1 === lato3) {
+  tipo = "isoscele";
+} else {
+  tipo = "scaleno";
+}
+
+console.log(`Triangolo ${tipo}, perimetro ${perimetro}`);

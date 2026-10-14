@@ -48,7 +48,7 @@ const utente = {
     indirizzo: {
         via: 'Giuseppe Avezzana 4',
         citta: 'Genova',
-        cap: 16134
+        cap: '16134'
     }
 };
 
@@ -121,6 +121,17 @@ let totaleFinale2 = totale2 + spedizione2;
 
 console.log(`Totale carrello: ${totale2}€ — Spedizione: ${spedizione2}€ — Totale finale: ${totaleFinale2}€`);
 
+/* TERNARIO CORRETTO */
+
+const totCarr =
+    totale >= 50
+        ? console.log(
+              `Totale carrello: ${totale} - Spedizione: gratuita - Totale finale: ${totale + 0}`,
+          )
+        : console.log(
+              `Totale carrello: ${totale} - Spedizione: 9.90 - Totale finale: ${totale + 9.9}`,
+          );
+
 /* ESERCIZIO 7 — typeof check
    Crea un array con 3 valori diversi (es. [42, 'ciao', true]).
    Con un for + if, per ogni elemento stampa 'x è un numero' o 'x non è un numero'.
@@ -150,9 +161,7 @@ const numeri = [];
 numeri.push(1, 2, 3, 4, 5);
 numeri.unshift(0);
 
-console.log(numeri);
-console.log(numeri.length);
-
+console.log(numeri, numeri.length);
 
 /* ESERCIZIO 9 — Carrello con splice
    Array ['Penna', 'Quaderno', 'Zaino', 'Astuccio'].
@@ -218,3 +227,24 @@ if (prodotti.indexOf(cercato) !== -1) {
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+
+const names = ['Mario', 'Nicola', 'Giovanna', 'Maria', 'Ernesto'];
+
+for (let i = 0; i < names.length; i++) {
+    console.log(names[i]);
+}
+
+for (let i = names.length - 1; i >= 0; i--) {
+    console.log(names[i]);
+}
+
+/* SCRIVI QUI LA TUA RISPOSTA */
+
+const numero = [1, 2, 3, 4, 5];
+const inverso = [];
+
+for (let i = numero.length - 1; i >= 0; i--) {
+    inverso.push(numero[i]);
+}
+
+console.log(inverso);

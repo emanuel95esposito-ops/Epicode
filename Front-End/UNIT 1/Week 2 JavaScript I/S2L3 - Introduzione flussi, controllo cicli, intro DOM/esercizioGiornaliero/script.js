@@ -230,25 +230,25 @@ console.log(`Massa totale: ${massaTotale}`);
 /* SCRIVI QUI LA TUA RISPOSTA */
 
 switch (true) {
-    case massaTotale < 500:
-        console.log('Carico leggero');
-        break;
+	case massaTotale < 500:
+		console.log('Carico leggero');
+		break;
 
-    case massaTotale < 700:
-        console.log('Carico medio');
-        break;
+	case massaTotale < 700:
+		console.log('Carico medio');
+		break;
 
-    case massaTotale < 900:
-        console.log('Attenzione: oltre 700');
-        break;
+	case massaTotale < 900:
+		console.log('Attenzione: oltre 700');
+		break;
 
-    case massaTotale <= 1000:
-        console.log('Carico critico');
-        break;
+	case massaTotale <= 1000:
+		console.log('Carico critico');
+		break;
 
-    default:
-        console.log('PERICOLO: sovraccarico');
-        break;
+	default:
+		console.log('PERICOLO: sovraccarico');
+		break;
 }
 
 /* ESERCIZIO 7 — Robotizza i n/a
@@ -258,6 +258,15 @@ switch (true) {
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
+for (let i = 0; i < starWarsCharacters.length; i++) {
+	if (starWarsCharacters[i].gender === 'n/a') {
+		starWarsCharacters[i].gender = 'robot';
+	}
+}
+
+console.log(starWarsCharacters);
+
+
 /* ESERCIZIO 8 — Più alto e più basso
    For su starWarsCharacters. Trova il personaggio con altezza maggiore e quello con altezza minore.
    L'altezza è una stringa: convertila con Number().
@@ -266,6 +275,22 @@ switch (true) {
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
+let piuAlto = starWarsCharacters[0];
+let piuBasso = starWarsCharacters[0];
+
+for (let i = 0; i < starWarsCharacters.length; i++) {
+    if (Number(starWarsCharacters[i].height) > Number(piuAlto.height)) {
+        piuAlto = starWarsCharacters[i];
+    }
+
+    if (Number(starWarsCharacters[i].height) < Number(piuBasso.height)) {
+        piuBasso = starWarsCharacters[i];
+    }
+}
+
+console.log(`Più alto: ${piuAlto.name} (${piuAlto.height} cm)`);
+console.log(`Più basso: ${piuBasso.name} (${piuBasso.height} cm)`);
+
 /* ESERCIZIO 9 — Rimuovi i femminili dai nomi (cicli annidati)
    Sull'array "nomi" dell'esercizio 1: for esterno su nomi, for interno su personaggiFemminili.
    Quando combaciano per nome, rimuovi quel nome da nomi con splice.
@@ -273,6 +298,19 @@ switch (true) {
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+
+console.log(`nomi prima: ${nomi.length}`);
+for (let i = 0; i < nomi.length; i++) {
+  for (let j = 0; j < personaggiFemminili.length; j++) {
+    if (nomi[i] === personaggiFemminili[j].name) {
+      nomi.splice(i, 1);
+      i--; // splice riduce la lunghezza: torno indietro per non saltare un elemento
+      break;
+    }
+  }
+}
+console.log(`nomi dopo: ${nomi.length}`);
+console.log(nomi);
 
 /* ESERCIZIO 10 — Personaggio casuale
    indice = Math.floor(Math.random() * starWarsCharacters.length)
@@ -283,9 +321,29 @@ switch (true) {
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
+const indice = Math.floor(Math.random() * starWarsCharacters.length);
+const scelto = starWarsCharacters[indice];
+console.log(`Personaggio scelto: ${scelto.name}`);
+
+if (scelto.gender === "female") {
+  console.log(`Lei è alta ${scelto.height} cm`);
+} else {
+  console.log(`Lui è alto ${scelto.height} cm`);
+}
+
+if (scelto.hair_color !== "n/a" && scelto.hair_color !== "none") {
+  console.log(`Capelli: ${scelto.hair_color}`);
+} else {
+  console.log("Senza capelli");
+}
+
 /* --EXTRA-- ESERCIZIO 11 — Conta per colore di occhi
    For...in sulle chiavi di perColoreOcchi.
    Stampa: "blue: 4 personaggi", "yellow: 2 personaggi", ecc.
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+
+for (const colore in perColoreOcchi) {
+  console.log(`${colore}: ${perColoreOcchi[colore].length} personaggi`);
+}

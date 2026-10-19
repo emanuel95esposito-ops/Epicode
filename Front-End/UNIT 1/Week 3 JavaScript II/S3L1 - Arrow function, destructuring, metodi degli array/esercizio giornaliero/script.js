@@ -268,7 +268,7 @@ const etaMedia = utenti.reduce(
     (somma, utente) => somma + utente.eta, 0
 ) / utenti.length;
 
-console.log(etaMedia);
+console.log(Number(etaMedia.toFixed(2)));
 
 // b) Contare gli utenti attivi
 
@@ -291,10 +291,27 @@ const ordinatiEta = [...utenti]
 
 console.log(ordinatiEta);
 
-// b) Ordinare per nome alfabeticamente
+// b) Ordinare per nome alfabeticamente 
+// LocalCompare può comportare problemi di server, meglio non utilizzarlo
+
+// const ordinatiNome = [...utenti]
+//     .sort((a, b) => a.nome.localeCompare(b.nome))
+//     .map(utente => utente.nome);
+
+// console.log(ordinatiNome);
+
+// b --> c) soluzione con IF
 
 const ordinatiNome = [...utenti]
-    .sort((a, b) => a.nome.localeCompare(b.nome))
+    .sort((a, b) => {
+        if (a.nome < b.nome) {
+            return -1;
+        } else if (a.nome > b.nome) {
+            return 1;
+        } else {
+            return 0;
+        }
+    })
     .map(utente => utente.nome);
 
 console.log(ordinatiNome);

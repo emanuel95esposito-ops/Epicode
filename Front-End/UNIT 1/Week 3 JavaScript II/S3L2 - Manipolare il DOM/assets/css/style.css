@@ -1,0 +1,24 @@
+.light {
+	background-color: goldenrod;
+}
+
+.green {
+	background-color: green;
+}
+
+.red {
+	background-color: red;
+}
+
+.cyan {
+	background-color: cyan;
+}
+
+table {
+    border-collapse: collapse;
+    width: 30%;
+}
+
+th, td {
+    border: 1px solid black;
+}

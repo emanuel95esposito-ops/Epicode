@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Eventi</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+		<script type="module" src="assets/js/script.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1 id="title">Gli eventi</h1>
+		</header>
+
+		<hr />
+
+		<main>
+			<h3>Click su button</h3>
+			<button type="button" id="firstBtn">CLICCA</button>
+			<button type="button" id="secondBtn">UNA VOLTA SOLA</button>
+			<p>&nbsp;</p>
+			<img
+				src="assets/img/EPICODE-pitto-color.png"
+				alt="Logo Epicode"
+				id="logo"
+			/>
+			<hr />
+			<h3>Eventi del form</h3>
+
+			<form id="myForm">
+				<label for="userName">Nome completo*</label>
+				<input type="text" id="userName" name="userName" required />
+				<p id="nameError" class="required"></p>
+				<label for="userEmail">Email*</label>
+				<input type="email" id="userEmail" name="userEmail" required />
+				<p id="emailError" class="required"></p>
+				<br /><br />
+				<label for="eta">Età</label>
+				<input type="number" id="eta" name="eta" />
+				<label for="submitDate">Data di iscrizione</label>
+				<input type="date" id="submitDate" name="submitDate" />
+				<br /><br />
+				<label for="userMessage">Messaggio</label>
+				<textarea id="userMessage" name="userMessage"></textarea>
+				<label for="course">Corso scelto*</label>
+				<select id="course" required>
+					<option value="" selected></option>
+					<option value="DA">Data Analysys</option>
+					<option value="FS">Full Stack Development</option>
+					<option value="CS">Cyber Security</option>
+				</select>
+				<p id="selectError" class="required"></p>
+				<p>
+					Selezione i tipi di frequenza preferiti
+					<span class="required">(almeno una selezione)</span>
+				</p>
+				<input type="checkbox" id="fullTime" value="fullTime" />
+				<label for="fullTime">Full-Time</label><br />
+				<input type="checkbox" id="partTime" value="partTime" />
+				<label for="partTime">Part-Time</label><br />
+				<input type="checkbox" id="serale" value="serale" />
+				<label for="serale">Serale</label><br /><br />
+				<p id="checkError" class="required"></p>
+				<button type="submit" id="submitForm">INVIA</button>
+				<button type="reset">CANCELLA</button>
+				<span class="required">* Campi obbligatori</span>
+			</form>
+			<hr />
+			<h3>Event delegation</h3>
+			<form id="taskForm">
+				<label for="newTask">Inserisci un nuovo elemento</label>
+				<input type="text" id="newTask" name="newTask" />
+				<button type="submit">AGGIUNGI</button>
+			</form>
+			<ul id="taskList"></ul>
+            <hr />
+            <button type="button" id="btnLink">GOOGLE</button>
+		</main>
+	</body>
+</html>

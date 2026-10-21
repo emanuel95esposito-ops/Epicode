@@ -14,105 +14,67 @@
 */
 
 // VARIABILI E ARRAY
-const lista = document.querySelector("#lista-task");
-const contatore = document.querySelector("#contatore");
+const lista = document.querySelector('#lista-task');
+const contatore = document.querySelector('#contatore');
 
-const tasks = [
-    { testo: "Pagare le bollette", priorita: "alta" },
-    { testo: "Studiare JavaScript", priorita: "media" },
-    { testo: "Comprare il pane", priorita: "bassa" },
-    { testo: "Chiamare il dentista", priorita: "alta" },
-    { testo: "Riposarsi", priorita: "bassa" },
-    { testo: "Andare in palestra", priorita: "media" },
-    { testo: "Studiare HTML e CSS", priorita: "alta" }
+const myTask = [
+    { titoloTask: 'Pagare le bollette', priorita: 'alta', data: new Date() },
+    { titoloTask: 'Studiare JavaScript', priorita: 'media', data: new Date() },
+    { titoloTask: 'Comprare il pane', priorita: 'bassa', data: new Date() },
+    { titoloTask: 'Chiamare il dentista', priorita: 'alta', data: new Date() },
+    { titoloTask: 'Riposarsi', priorita: 'bassa', data: new Date() },
+    { titoloTask: 'Andare in palestra', priorita: 'media', data: new Date() },
+    { titoloTask: 'Studiare HTML e CSS', priorita: 'alta', data: new Date() }
 ];
 
-let idProgressivo = 0;
+function aggiungiTask() {
+	myTask.forEach((task) => {
+		const newLi = document.createElement('li');
+		newLi.classList.add(`priorita-${task.priorita}`);
 
+		const textSpan = document.createElement('span');
+		textSpan.textContent = task.titoloTask;
+		newLi.appendChild(textSpan);
 
-// ESERCIZIO 1
-function aggiungiTask(testo, priorita) {
-    const task = document.createElement("li");
-    task.classList.add("priorita-" + priorita);
+		const badge = document.createElement('span');
+		badge.classList.add('badge');
+		badge.textContent = task.priorita;
+		newLi.appendChild(badge);
 
-    const spanTesto = document.createElement("span");
-    spanTesto.textContent = testo;
+		const taskDate = document.createElement('span');
+		taskDate.classList.add('data', 'divData');
+		taskDate.textContent = task.data.toLocaleString('it-IT');
 
-    const badge = document.createElement("span");
-    badge.classList.add("badge");
-    badge.textContent = priorita.toUpperCase();
+		const elimina = document.createElement('button');
+		elimina.textContent = 'Elimina';
+		taskDate.appendChild(elimina);
+		newLi.appendChild(taskDate);
 
-    const divData = document.createElement("div");
-    divData.classList.add("divData");
+		lista.appendChild(newLi);
+	});
+}
 
-    task.appendChild(spanTesto);
-    task.appendChild(badge);
-    task.appendChild(divData);
-
-    aggiungiData(divData);
-    aggiungiBottoneElimina(divData);
-
-    lista.appendChild(task);
-
-    contatore.textContent = lista.querySelectorAll("li").length;
+function aggiornaContatore() {
+	contatore.textContent = myTask.length;
 }
 
 
-// ESERCIZIO 2
-function aggiungiBottoneElimina(divData) {
-    const bottoneElimina = document.createElement("button");
-    bottoneElimina.textContent = "Elimina";
-
-    idProgressivo++;
-    bottoneElimina.setAttribute("data-id", idProgressivo);
-
-    divData.appendChild(bottoneElimina);
-}
-
-
-// ESERCIZIO 6
 function evidenzia(indice) {
-    const task = lista.querySelectorAll("li")[indice];
+    const task = lista.querySelectorAll('li')[indice];
 
     if (task) {
-        task.classList.add("evidenziato");
+        task.classList.add('evidenziato');
     }
 }
 
 function togliEvidenza(indice) {
-    const task = lista.querySelectorAll("li")[indice];
+    const task = lista.querySelectorAll('li')[indice];
 
     if (task) {
-        task.classList.remove("evidenziato");
+        task.classList.remove('evidenziato');
     }
 }
 
-
-// ESERCIZIO 7 - Data automatica nel task
-function aggiungiData(divData) {
-    const data = document.createElement("span");
-    data.classList.add("data");
-    data.textContent = new Date().toLocaleString("it-IT");
-
-    divData.appendChild(data);
-}
-
-
-// ESERCIZIO 8 - Conta i task per priorità
-function contaPerPriorita() {
-    return {
-        alta: lista.querySelectorAll(".priorita-alta").length,
-        media: lista.querySelectorAll(".priorita-media").length,
-        bassa: lista.querySelectorAll(".priorita-bassa").length
-    };
-}
-
-
-// ESECUZIONE INIZIALE
-for (const elemento of tasks) {
-    aggiungiTask(elemento.testo, elemento.priorita);
-}
-
+aggiungiTask();
+aggiornaContatore();
 evidenzia(1);
-
-console.log(contaPerPriorita());

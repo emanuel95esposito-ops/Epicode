@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Le mie cose da fare</h1>
+
+    <form id="form-task">
+        <input type="text" id="campo-task" placeholder="Cosa devi fare?">
+        <button type="submit">Aggiungi</button>
+    </form>
+
+    <p id="errore" class="errore"></p>
+
+    <div class="filtri">
+        <button type="button" data-filtro="tutti" class="attivo">Tutti</button>
+        <button type="button" data-filtro="attivi">Attivi</button>
+        <button type="button" data-filtro="completati">Completati</button>
+    </div>
+
+    <ul id="lista-task"></ul>
+
+    <p>Attivi: <span id="contatore">0</span></p>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -188,4 +188,9 @@ const tic = setInterval(() => {
     console.log(`Numero ${counter}`);
 }, 1000);
 
-// ci manca l'ultimo pezzo, vedi da registrazione***
+document.addEventListener('keydown', (e) => {
+	console.log(e.key);
+    if (e.key === 'Enter') {
+        console.log('Hai confermato l\'azione');
+    }   
+});

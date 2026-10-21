@@ -1,0 +1,149 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    color: #1b2845;
+}
+
+h1 {
+    margin-bottom: 24px;
+}
+
+#form-task {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+#campo-task {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.errore {
+    color: #c23b3b;
+    min-height: 20px;
+    margin-bottom: 12px;
+}
+
+.filtri {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.filtri button.attivo {
+    background: #1b2845;
+    color: #ffffff;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Aggiungi qui le tue regole CSS per:
+   - testo barrato sui task completati
+   - eventuali stati visivi
+*/
+
+.priorita-alta {
+    background-color: #fde2e2;
+}
+
+.priorita-media {
+    background-color: #fffbe6;
+}
+
+.priorita-bassa {
+    background-color: #e2f5e2;
+}
+
+.testo-task {
+    overflow-wrap: anywhere;
+}
+
+.completato {
+    text-decoration: line-through;
+    color: #687080;
+}
+
+.badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background-color: #1b2845;
+    color: white;
+    text-transform: uppercase;
+}
+
+.divData {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.data {
+    font-size: 12px;
+    color: #687080;
+    white-space: nowrap;
+}
+
+.evidenziato {
+    outline: 2px solid #f6c948;
+    outline-offset: -2px;
+}
+
+.checkbox-task {
+    accent-color: #3158d0;
+}
+
+#form-task button {
+    background-color: white;
+    color: #1b2845;
+    border: 1px solid #1b2845;
+    border-radius: 5px;
+}
+
+#form-task button:hover {
+    background-color: #1b2845;
+    color: white;
+    border-color: #1b2845;
+}
+
+.elimina {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color: white;
+    color: #c23b3b;
+    border: 1px solid #e25555;
+    border-radius: 6px;
+}
+
+.elimina:hover {
+    background-color: #c23b3b;
+    color: white;
+    border-color: #c23b3b;
+}

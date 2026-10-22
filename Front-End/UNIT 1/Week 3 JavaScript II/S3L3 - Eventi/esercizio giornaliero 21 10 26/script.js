@@ -125,7 +125,7 @@ formTask.addEventListener('submit', (e) => {
 });
 
 
-// ESERCIZIO 2 - Funzione renderLista() (filtra, crea <li>, aggiorna contatore)
+// ESERCIZIO 2 - Funzione r enderLista() (filtra, crea <li>, aggiorna contatore)
 function renderLista() {
     lista.textContent = '';
 

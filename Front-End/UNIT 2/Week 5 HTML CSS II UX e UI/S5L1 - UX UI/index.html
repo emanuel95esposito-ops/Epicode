@@ -140,9 +140,7 @@
                     </tr>
                 </tbody>
             </table>
-            <a class="torna-menu" href="#site-header">
-                <i class="fa-solid fa-arrow-up"></i>
-                Torna al menu</a>
+
         </section>
 
         <!-- Sezione Esperienze -->
@@ -179,9 +177,7 @@
                 </table>
             </div>
             <br />
-            <a class="torna-menu" href="#site-header">
-                <i class="fa-solid fa-arrow-up"></i>
-                Torna al menu</a>
+
         </section>
 
         <!-- Sezione progetti -->
@@ -220,10 +216,6 @@
             </article>
             <br />
             <div class="link-progetti">
-                <a class="torna-menu" href="#site-header">
-                    <i class="fa-solid fa-arrow-up"></i>
-                    Torna al menu
-                </a>
 
                 <a class="dettagli" href="progetti.html">
                     <i class="fa-solid fa-arrow-right"></i>
@@ -235,9 +227,32 @@
         <!-- Sezione Contatti -->
         <section id="contatti">
             <h2>Contattami</h2>
-            <p>Compila il form per scrivermi. Ti rispondo entro 24H.</p>
 
-            <form action="success.html" method="get">
+            <p>
+                Per proposte, collaborazioni o domande, puoi contattarmi qui.
+            </p>
+
+            <button type="button" id="apri-contatti">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                Scrivimi
+            </button>
+
+        </section>
+    </main>
+
+    <a href="#" class="back-to-top" aria-label="Torna in cima">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a>
+
+    <div id="overlay-contatti" class="overlay" >
+        <div class="modal" >
+
+            <button type="button" id="chiudi-contatti" aria-label="Chiudi">
+                &times;
+            </button>
+
+            <h2 id="titolo-modale">Contattami</h2>
+
+                <form action="success.html" method="get">
 
                 <p>
                     <label for="nome">Nome</label><br>
@@ -280,12 +295,10 @@
                 </p>
 
             </form>
-            <a class="torna-menu" href="#site-header">
-                <i class="fa-solid fa-arrow-up"></i>
-                Torna al menu
-            </a>
-        </section>
-    </main>
+
+        </div>
+    </div>
+
     <footer id="site-footer">
         <div class="social">
             <a href="#site-footer" aria-label="GitHub">
@@ -303,6 +316,7 @@
         </div>
         <p>&copy; 2026 Emanuel Esposito – Costruito a mano durante la prima settimana del corso Epicode</p>
     </footer>
+    <script src="assets/JS/script.js"></script>
 </body>
 
 </html>

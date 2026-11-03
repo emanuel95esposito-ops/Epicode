@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Positioning</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+		<script type="module" src="assets/js/script.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Positiong avanzato</h1>
+			<nav>
+				<ul>
+					<li><a href="#relative">relative</a></li>
+					<li><a href="#absolute">absolute</a></li>
+					<li><a href="#relAbs">relative-absolute</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<div class="container">
+			<h2 class="title" id="relative">Position: relative;</h2>
+			<div class="first">
+				<h4>PRIMO DIV</h4>
+			</div>
+			<div class="second relative">
+				<h4>SECONDO DIV RELATIVE</h4>
+			</div>
+			<div class="third">
+				<h4>TERZO DIV</h4>
+			</div>
+
+			<hr />
+
+			<h2 class="title" id="absolute">Position: absolute;</h2>
+			<div class="first">
+				<h4>PRIMO DIV</h4>
+			</div>
+			<div class="second absolute">
+				<h4>SECONDO DIV ABSOLUTE</h4>
+			</div>
+			<div class="third">
+				<h4>TERZO DIV</h4>
+			</div>
+
+			<hr />
+
+			<h2 class="title" id="relAbs">Position: relative+absolute;</h2>
+
+			<div class="first">
+				<h4>PRIMO DIV</h4>
+			</div>
+			<div class="second relAbs">
+				<div class="positionAbs">❌</div>
+				<h4>SECONDO DIV RELATIVE-ABSOLUTE</h4>
+			</div>
+			<div class="third">
+				<h4>TERZO DIV</h4>
+			</div>
+
+			<hr />
+
+			<h2 class="title" id="relAbs">
+				Position: fixed; (notare la posizione dei button social)
+			</h2>
+
+			<div class="social">
+				<div id="facebook"></div>
+				<div id="instagram"></div>
+				<a href="#">
+					<div id="topPage"></div>
+				</a>
+			</div>
+
+			<hr />
+
+			<h2 class="title" id="relAbs">FINESTRA MODALE</h2>
+
+			<button type="button" id="openModal">APRI</button>
+
+			<p>&nbsp;</p>
+
+			<div class="overlay">
+				<div class="modal">
+					<button class="positionAbs closeModal">❌</button>
+					<h2>Form Modale</h2>
+					<form>
+						<label for="userName">Nome completo</label>
+						<input type="text" id="userName" name="userName" />
+						<br />
+						<label for="userEmail">Email</label>
+						<input type="email" id="userEmail" name="userEmail" />
+						<br />
+						<label for="enrollDate">Data di iscrizione</label>
+						<input type="date" id="enrollDate" name="enrollDate" />
+						<br />
+						<button type="submit">Conferma</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="formResponse">
+				<h2>Dati del form</h2>
+				<h3 id="regName"></h3>
+				<h3 id="regEmail"></h3>
+				<h3 id="regDate"></h3>
+			</div>
+		</div>
+	</body>
+</html>

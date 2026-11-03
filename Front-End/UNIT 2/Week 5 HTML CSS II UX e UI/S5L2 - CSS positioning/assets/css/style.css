@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto', sans-serif;
+	scroll-padding-top: 120px;
+}
+
+header {
+	background-color: black;
+	color: white;
+	height: 100px;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	padding: 10px;
+}
+
+h1 {
+	text-align: center;
+	margin-block-start: 0;
+}
+
+nav ul {
+	width: 50%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+nav ul li {
+	list-style-type: none;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+nav ul li a {
+	color: white;
+	font-size: 1.2rem;
+}
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.title {
+	text-align: center;
+	background-color: burlywood;
+}
+
+.relative {
+	position: relative;
+	top: 20px;
+	left: 40px;
+}
+
+.first,
+.second,
+.third {
+	width: 25%;
+	height: 200px;
+	border: 2px solid black;
+	margin-top: 20px;
+}
+
+.second {
+	background-color: aqua;
+}
+
+.absolute {
+	position: absolute;
+	top: 150px;
+	right: 10px;
+}
+
+.relAbs {
+	position: relative;
+}
+
+.positionAbs {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: red;
+	color: white;
+	font-size: 1.5rem;
+}
+
+.social div {
+	width: 50px;
+	height: 50px;
+}
+
+#facebook {
+	background: url('https://files.softicons.com/download/social-media-icons/hq-social-media-icons-by-design-bolts/png/256x256/Facebook.png');
+	background-size: contain;
+	position: fixed;
+	right: 10px;
+	bottom: 200px;
+}
+
+#instagram {
+	background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuH7c5cLpGehi0b4iQk90fXUzC9p7Ebla13w&s');
+	background-size: contain;
+	position: fixed;
+	right: 10px;
+	bottom: 150px;
+}
+
+#topPage {
+	background: url('https://www.alessandracagalli-psicologa.it/wp-content/uploads/2015/10/alessandracagalli-psicologa-torna-su-13.png');
+	background-size: contain;
+	position: fixed;
+	right: 10px;
+	bottom: 50px;
+}
+
+#topPage:hover {
+	background-color: red;
+}
+
+/* Finestra modale */
+.overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 2000;
+}
+
+.modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 25px;
+	border-radius: 10px;
+	max-width: 480px;
+}
+
+#openModal {
+	font-size: 1.2rem;
+	background-color: cyan;
+	border-style: double;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#openModal:hover {
+	background-color: green;
+	color: white;
+}
+
+.closeModal {
+	cursor: pointer;
+}
+
+.formResponse {
+	display: none;
+}

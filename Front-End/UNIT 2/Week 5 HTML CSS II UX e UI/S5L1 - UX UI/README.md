@@ -28,3 +28,28 @@ Il risultato riguarda il punto campionato. Un gradiente scuro contribuisce a man
 HTML5 · CSS3 · Media Queries · Chrome DevTools
 
 **EPICODE — Full Stack AI Developer 2026**
+
+## Aggiornamento 04/11/2026 — Refactoring con Flexbox
+
+Durante la lezione EPICODE ho migliorato il layout responsive del portfolio utilizzando Flexbox.
+
+### Modifiche effettuate
+
+- **Navigazione:** utilizzo di `display: flex`, `flex-wrap`, `gap` e `justify-content` per distribuire uniformemente i pulsanti.
+- **Chi Sono:** sostituzione di `float` con Flexbox per affiancare avatar e testo da 768px.
+- **Competenze:** creazione di chips arrotondate, con dimensioni uniformi e disposizione responsive.
+- **Progetti:** realizzazione di una griglia responsive con `flex-wrap` e `flex: 1 1 300px`.
+- **Footer:** riorganizzazione delle icone social e del copyright con Flexbox.
+- **Form Contattami:** utilizzo di `localStorage`, `JSON.stringify()` e `JSON.parse()` per visualizzare i dati nella pagina `success.html`.
+
+### Concetti approfonditi
+
+- `display: flex`
+- `flex-direction`
+- `justify-content` e `align-items`
+- `flex-wrap` e `gap`
+- `flex-grow`, `flex-shrink` e `flex-basis`
+- `order`
+- `localStorage` e manipolazione del DOM
+
+**Nota:** il modulo di contatto è dimostrativo. I dati vengono salvati nel browser e non inviati a un server.

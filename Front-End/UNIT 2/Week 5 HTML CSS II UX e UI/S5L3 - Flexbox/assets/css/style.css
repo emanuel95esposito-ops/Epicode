@@ -1,0 +1,167 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+h1,
+h2 {
+	text-align: center;
+}
+
+.justify,
+.children,
+.flexProperty,
+.children2 {
+	display: flex;
+	justify-content: space-evenly;
+	border: 1px solid black;
+	padding: 10px;
+}
+
+.flexProperty {
+	gap: 15px;
+}
+
+.align, .children2 {
+	display: flex;
+	border: 1px solid black;
+	padding: 10px;
+	/* align-items: flex-start; */
+	height: 200px;
+}
+
+.children2 {
+    align-items: flex-start;
+}
+
+.children2 div:nth-child(3) {
+    align-self: flex-end;
+}
+
+.combine {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	border: 1px solid black;
+	padding: 10px;
+	height: 600px;
+}
+
+.multiple {
+	display: flex;
+	justify-content: space-evenly;
+	border: 1px solid black;
+	padding: 10px;
+	flex-wrap: wrap;
+	height: 300px;
+	align-content: flex-start;
+	gap: 30px;
+}
+
+.justify div,
+.align div,
+.combine div,
+.multiple div,
+.children div,
+.children2 div {
+	border: 3px solid red;
+	width: 20%;
+	text-align: center;
+}
+
+.multiple div {
+	width: 40%;
+}
+
+.children div {
+	width: 15%;
+}
+
+.flexProperty div {
+	border: 3px solid red;
+	text-align: center;
+	flex: 1;
+}
+
+.children div:first-child {
+	flex-shrink: 2;
+}
+
+.children div:nth-child(3) {
+	flex-grow: 1;
+}
+
+.children div:nth-child(2) {
+	flex-grow: 2;
+}
+
+.align img {
+	width: 20%;
+}
+
+@media (max-width: 577px) {
+	.justify {
+		display: block;
+	}
+
+	.justify div {
+		width: 100%;
+	}
+}
+
+@media (max-width: 993px) {
+	.justify {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.justify div {
+		width: 40%;
+	}
+}
+
+.siteLayout {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid black;
+	gap: 20px;
+}
+
+.siteLayout div {
+	border: 3px solid red;
+	text-align: center;
+}
+
+@media (min-width: 768px) {
+	.siteLayout {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.siteLayout div:first-child {
+		flex: 1;
+		order: 2;
+	}
+
+	.siteLayout div:nth-child(2) {
+		width: 25%;
+		order: 1;
+	}
+
+	.siteLayout div:last-child {
+		width: 100%;
+		order: 3;
+	}
+}
+
+@media (min-width: 1200px) {
+	.siteLayout {
+		flex-wrap: nowrap;
+	}
+
+	.siteLayout div:last-child {
+		width: 20%;
+	}
+}

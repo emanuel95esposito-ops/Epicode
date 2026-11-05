@@ -4,10 +4,28 @@
     box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 /* Immagini responsive */
 img {
     max-width: 100%;
     height: auto;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 270px;
 }
 
 body {
@@ -20,6 +38,10 @@ body {
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
+}
+
+body.modal-aperto {
+    overflow: hidden;
 }
 
 h1,
@@ -45,6 +67,35 @@ main section {
     border-radius: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     background-color: #FFFFFF;
+    animation: comparsaSezione 500ms ease-out both;
+}
+
+@keyframes comparsaSezione {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main section:nth-of-type(2) {
+    animation-delay: 100ms;
+}
+
+main section:nth-of-type(3) {
+    animation-delay: 200ms;
+}
+
+main section:nth-of-type(4) {
+    animation-delay: 300ms;
+}
+
+main section:nth-of-type(5) {
+    animation-delay: 400ms;
 }
 
 main section h2::before {
@@ -53,6 +104,53 @@ main section h2::before {
     font-family: Arial, sans-serif;
     font-size: 0.67em;
     margin-right: 10px;
+}
+
+.card-riepilogo {
+    background-color: #fbf8f1;
+    border: 1px solid #e6e0d3;
+    border-left: 5px solid hsl(45, 90%, 50%);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    animation: entrataRiepilogo 500ms ease-out 200ms both;
+}
+
+@keyframes entrataRiepilogo {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-riepilogo h3 {
+    margin-top: 0;
+}
+
+.card-riepilogo ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-riepilogo li {
+    padding: 8px 0;
+    border-bottom: 1px solid #e6e0d3;
+    overflow-wrap: anywhere;
+}
+
+.card-riepilogo li:last-child {
+    border-bottom: none;
+}
+
+.card-riepilogo li::first-letter {
+    text-transform: uppercase;
 }
 
 #site-header {
@@ -123,12 +221,16 @@ nav a {
     font-weight: 600;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
+    transition: background-color 200ms ease,
+        color 200ms ease,
+        transform 200ms ease;
 }
 
 nav a:hover {
     color: hsl(220, 60%, 25%);
     background-color: hsl(45, 90%, 60%);
     border-color: hsl(45, 90%, 60%);
+    transform: translateY(-2px);
 }
 
 nav a i {
@@ -179,6 +281,11 @@ h3 {
     margin: 0 auto;
     object-fit: cover;
     object-position: center 50%;
+    transition: transform 250ms ease-out;
+}
+
+.avatar:hover {
+    transform: scale(1.05) rotate(3deg);
 }
 
 #chi-sono figcaption {
@@ -216,6 +323,14 @@ h3 {
     border-radius: 999px;
     text-align: center;
     white-space: nowrap;
+    cursor: pointer;
+    transition: transform 150ms ease,
+        background-color 150ms ease;
+}
+
+.skill-list li:hover {
+    transform: translateY(-2px);
+    background-color: hsl(220, 60%, 40%);
 }
 
 .skill-list li:first-child {
@@ -354,6 +469,13 @@ h3 {
     border: 1px solid #e6e0d3;
     border-radius: 6px;
     position: relative;
+    transition: transform 200ms ease-out,
+        box-shadow 200ms ease-out;
+}
+
+.project:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
 }
 
 .project:nth-of-type(odd) {
@@ -367,17 +489,17 @@ h3 {
     border-left: 5px solid hsl(45, 90%, 50%);
 }
 
-.project a {
+.project a, .dettaglio a {
     color: hsl(220, 60%, 30%);
     font-weight: 600;
     text-decoration: none;
 }
 
-.project a i {
+.project a i, .dettaglio a i {
     margin-right: 6px;
 }
 
-.project a:hover {
+.project a:hover, .dettaglio a:hover {
     color: hsl(220, 60%, 45%);
     border-bottom: 2px solid hsl(45, 90%, 50%);
 }
@@ -393,6 +515,22 @@ h3 {
     border-radius: 0 4px 0 4px;
     font-size: 0.9rem;
     font-weight: 700;
+    animation: pulseNew 1.5s ease-in-out infinite;
+    transform-origin: top right;
+}
+
+@keyframes pulseNew {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 label {
@@ -447,12 +585,16 @@ button {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 1rem;
     font-weight: 600;
+    transition: background-color 200ms ease,
+        box-shadow 200ms ease,
+        transform 200ms ease;
 }
 
 button:hover {
     background-color: hsl(220, 60%, 45%);
     color: #ffffff;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+    transform: translateY(-2px);
 }
 
 button i {
@@ -474,6 +616,21 @@ button i {
     line-height: 44px;
     text-decoration: none;
     z-index: 50;
+    animation: pulseRing 2s ease-out infinite;
+}
+
+@keyframes pulseRing {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 12px rgba(255, 193, 7, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+    }
 }
 
 .back-to-top:hover {
@@ -493,6 +650,17 @@ button i {
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 2000;
+    animation: fadeIn 250ms ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* Finestra modale - contenitore del form */
@@ -509,6 +677,19 @@ button i {
     background-color: #ffffff;
     padding: 24px;
     border-radius: 8px;
+    animation: slideUp 300ms ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .modal h2 {
@@ -529,6 +710,10 @@ button i {
     line-height: 32px;
 }
 
+#chiudi-contatti:hover {
+    transform: translateY(-2px);
+}
+
 .link-progetti .torna-menu {
     float: left;
     margin: 0;
@@ -543,12 +728,16 @@ button i {
     text-decoration: none;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
+    transition: background-color 200ms ease,
+            color 200ms ease,
+            transform 200ms ease;
 }
 
 #site-header .torna-home:hover {
     color: hsl(220, 60%, 25%);
     background-color: hsl(45, 90%, 60%);
     border-color: hsl(45, 90%, 60%);
+    transform: translateY(-2px);
 }
 
 #site-header .torna-home i {
@@ -619,6 +808,22 @@ button i {
     border: 1px solid #e6e0d3;
     border-radius: 6px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: transform 200ms ease-out,
+        box-shadow 200ms ease-out;
+    animation: comparsaSezione 500ms ease-out backwards;
+}
+
+.dettaglio:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.dettaglio:nth-of-type(2) {
+    animation-delay: 100ms;
+}
+
+.dettaglio:nth-of-type(3) {
+    animation-delay: 200ms;
 }
 
 .dettaglio h3::before {
@@ -693,6 +898,10 @@ button i {
 /* TABLET E DESKTOP - da 768px */
 @media screen and (min-width: 768px) {
 
+    html {
+        scroll-padding-top: 320px;
+    }
+
     /* Header */
     #site-header {
         padding: 60px 20px 40px;
@@ -729,7 +938,6 @@ button i {
         min-width: 0;
         max-width: 160px;
         padding: 6px 4px;
-        cursor: pointer;
     }
 
     .skill-list li:last-child {
@@ -776,6 +984,14 @@ button i {
     #site-footer {
         flex-direction: row-reverse;
         justify-content: space-between;
+    }
+
+    .social {
+        margin-right: 70px;
+    }
+
+    .back-to-top {
+        bottom: 40px;
     }
 }
 

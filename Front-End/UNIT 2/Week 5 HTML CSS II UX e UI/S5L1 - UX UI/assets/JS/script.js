@@ -14,22 +14,26 @@ const registeredUser = {
 buttonScrivimi.addEventListener('click', (e) => {
     e.preventDefault();
     overlay.style.display = 'block';
+    document.body.classList.add('modal-aperto');
 });
 
 buttonChiudi.addEventListener('click', (e) => {
     e.preventDefault();
     overlay.style.display = 'none';
+    document.body.classList.remove('modal-aperto');
 });
 
 overlay.addEventListener('click', (e) => {
     if (e.target === overlay) {
         overlay.style.display = 'none';
+        document.body.classList.remove('modal-aperto');
     }
 });
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         overlay.style.display = 'none';
+        document.body.classList.remove('modal-aperto');
     }
 });
 

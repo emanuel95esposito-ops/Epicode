@@ -8,6 +8,39 @@ Realizzazione e miglioramento di un portfolio personale con approccio **mobile-f
 
 ---
 
+## Aggiornamento n.2 05/11/2026 — Restyling header e refactoring CSS
+
+### Modifiche grafiche
+- Sostituita l'immagine delle montagne con uno sfondo tecnologico originale, caratterizzato da connessioni digitali e dettagli blu e oro.
+- Ottimizzato il gradiente dell'header per migliorare la visibilità dell'immagine.
+- Migliorato il contrasto dell'H1 tramite `radial-gradient()`.
+- Migliorata la leggibilità della tagline utilizzando `text-shadow`.
+- Uniformato lo sfondo dei pulsanti di navigazione con un blu notte semitrasparente.
+
+### Accessibilità e contrasto
+- Eseguite verifiche del contrasto tramite Chrome DevTools.
+- **H1:** contrasto rilevato di 5.49:1, superiore ai requisiti WCAG AA e AAA per il testo grande nel punto verificato.
+- **Navigazione:** contrasto rilevato di 14.5:1, superiore ai requisiti WCAG AA e AAA nel punto verificato.
+- Verificata la leggibilità su differenti larghezze dello schermo.
+- Aggiunta un'ombra alla tagline per migliorare la leggibilità sulle aree luminose. Il relativo contrasto WCAG resta da verificare.
+
+### Refactoring CSS
+- Riorganizzato il foglio di stile utilizzando il CSS Nesting.
+- Raggruppati selettori, pseudo-classi e pseudo-elementi.
+- Mantenuti il layout responsive, le animazioni e le media query esistenti.
+- Migliorata la leggibilità e la manutenzione del codice.
+
+### Concetti approfonditi
+- CSS Nesting
+- `background-image` e `linear-gradient()`
+- `radial-gradient()`
+- `text-shadow`
+- `rgba()` e trasparenze
+- Specificità e organizzazione dei selettori
+- Verifica del contrasto WCAG con Chrome DevTools
+
+---
+
 ## Aggiornamento 05/11/2026 — Animazioni CSS e miglioramenti UI
 
 Durante la lezione EPICODE ho introdotto animazioni e transizioni CSS per rendere il portfolio più dinamico e migliorare l'esperienza utente.

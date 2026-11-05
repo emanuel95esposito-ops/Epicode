@@ -11,6 +11,18 @@ const registeredUser = {
     consenso: false,
 }
 
+function chiudiModale() {
+    if (overlay.classList.contains('closing')) return;
+
+    overlay.classList.add('closing');
+
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        overlay.classList.remove('closing');
+        document.body.classList.remove('modal-aperto');
+    }, 300);
+}
+
 buttonScrivimi.addEventListener('click', (e) => {
     e.preventDefault();
     overlay.style.display = 'block';
@@ -19,21 +31,18 @@ buttonScrivimi.addEventListener('click', (e) => {
 
 buttonChiudi.addEventListener('click', (e) => {
     e.preventDefault();
-    overlay.style.display = 'none';
-    document.body.classList.remove('modal-aperto');
+    chiudiModale();
 });
 
 overlay.addEventListener('click', (e) => {
     if (e.target === overlay) {
-        overlay.style.display = 'none';
-        document.body.classList.remove('modal-aperto');
+        chiudiModale();
     }
 });
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        overlay.style.display = 'none';
-        document.body.classList.remove('modal-aperto');
+        chiudiModale();
     }
 });
 

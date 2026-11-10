@@ -9,3 +9,4 @@ theme.addEventListener('click', () => {
 		myHtml.setAttribute('data-bs-theme', 'dark');
 	}
 });
+

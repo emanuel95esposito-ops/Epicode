@@ -32,6 +32,7 @@ const titoloModal = document.querySelector("#modalProdottoLabel");
 const immagineModal = document.querySelector("#imgProduct");
 const descrizioneModal = document.querySelector("#description");
 const prezzoModal = document.querySelector("#price");
+const toggleTema = document.querySelector("#toggle-tema");
 
 // FUNZIONE PER CREARE ELEMENTO
 
@@ -65,7 +66,7 @@ function dettaglio(prodottoSelezionato) {
 prodotti.forEach((articolo, i) => {
     const colonna = creaElemento("div", "col-12 col-md-6 col-xl-4", listaProdotti);
 
-    const card = creaElemento("div", "card shadow-sm", colonna);
+    const card = creaElemento("div", "card", colonna);
 
     const immagine = creaElemento("img", "card-img-top", card);
     immagine.src = articolo.immagine;
@@ -88,4 +89,16 @@ prodotti.forEach((articolo, i) => {
     bottone.addEventListener("click", () => {
         dettaglio(articolo);
     });
+});
+
+// CAMBIO TEMA CHIARO / SCURO
+
+toggleTema.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    if (document.body.classList.contains("dark")) {
+        toggleTema.textContent = "Tema chiaro";
+    } else {
+        toggleTema.textContent = "Tema scuro";
+    }
 });

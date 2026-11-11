@@ -1,0 +1,107 @@
+@use 'colors' as colors;
+
+// VARIABILI GENERALI
+$radius-base: 10px;
+
+// MIXIN RESPONSIVE
+@mixin solo-su($bp) {
+    @media (min-width: $bp) {
+        @content;
+    }
+}
+
+@mixin tema($bg, $testo, $card-bg, $bordo, $muted) {
+    background-color: $bg;
+    color: $testo;
+
+    .card {
+        background-color: $card-bg;
+        border-color: $bordo;
+        color: $testo;
+
+        .text-muted {
+            color: $muted !important;
+        }
+    }
+
+    aside {
+        .bg-light {
+            background-color: $card-bg !important;
+            border-color: $bordo !important;
+            color: $testo;
+        }
+    }
+
+    .modal-content {
+        background-color: $card-bg;
+        color: $testo;
+        border-color: $bordo;
+
+        .modal-header,
+        .modal-footer {
+            border-color: $bordo;
+        }
+    }
+}
+
+// TEMA CHIARO (PREDEFINITO)
+
+body {
+    @include tema(colors.$light-bg,
+        colors.$light-text,
+        colors.$light-card,
+        colors.$light-border,
+        colors.$light-muted );
+
+    transition: background-color 200ms ease, color 200ms ease;
+}
+
+// EFFETTO HOVER DELLE CARD
+.card {
+    border-radius: $radius-base;
+    box-shadow: colors.$shadow-card;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+
+    @include solo-su(768px) {
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: colors.$shadow-card-hover;
+        }
+    }
+}
+
+// TEMA SCURO
+
+body.dark {
+    @include tema(colors.$dark-bg,
+        colors.$dark-text,
+        colors.$dark-card,
+        colors.$dark-border,
+        colors.$dark-muted );
+
+    .navbar {
+        background-color: darken(colors.$brand-primary, 10%) !important; // soluzione deprecata, sotto soluzione aggiornata
+        //     aggiungiungendo ad iizio pagina --> @use 'sass:color <-- posso usare le funzioni SASS per modificare i colori.
+        //     background-color: color.adjust(
+        //     colors.$brand-primary,
+        //     $lightness: -10%,
+        //     $space: hsl --> indica di utilizzare il modello colore HSL.
+        // ) !important; 
+    }
+
+    .card {
+        box-shadow: colors.$shadow-card-dark;
+
+        @include solo-su(768px) {
+            &:hover {
+                box-shadow: colors.$shadow-card-hover-dark;
+            }
+        }
+    }
+
+    .modal-content {
+        .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+    }
+}

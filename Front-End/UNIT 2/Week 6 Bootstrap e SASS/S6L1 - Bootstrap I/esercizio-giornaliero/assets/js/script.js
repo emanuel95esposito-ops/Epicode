@@ -37,21 +37,16 @@ const prezzoModal = document.querySelector("#price");
 
 function creaElemento(tag, classe, genitore, testo, id) {
     const elemento = document.createElement(tag);
-
     elemento.className = classe;
-
     if (testo !== undefined) {
         elemento.textContent = testo;
     }
-
     if (id !== undefined) {
         elemento.id = id;
     }
-
     if (genitore !== undefined) {
         genitore.appendChild(elemento);
     }
-
     return elemento;
 }
 

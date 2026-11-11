@@ -1,0 +1,94 @@
+.sidebar, .secondaryContent {
+  margin: 0 auto;
+  padding: 15px;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  color: cyan;
+}
+
+p {
+  border: 2px solid blue;
+  border-radius: 10px;
+  color: cyan;
+}
+
+.send {
+  border: 1px solid black;
+  border-radius: 5px;
+  color: cyan;
+}
+
+.container {
+  color: red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1.2em;
+  width: 50%;
+}
+@media (min-width: 768px) {
+  .container {
+    margin-top: 5%;
+  }
+}
+
+.news {
+  color: red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1.2em;
+}
+
+.secondaryContent {
+  background-color: rgb(19.8039215686%, 100%, 73.059129902%);
+}
+
+.sidebar {
+  width: 20%;
+  padding: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: aquamarine;
+}
+nav ul {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+@media (min-width: 768px) {
+  nav ul {
+    flex-direction: row;
+  }
+}
+nav ul li {
+  list-style-type: none;
+}
+nav ul li a {
+  color: cyan;
+}
+nav ul li a:hover {
+  color: red;
+}
+
+/*# sourceMappingURL=style.css.map */

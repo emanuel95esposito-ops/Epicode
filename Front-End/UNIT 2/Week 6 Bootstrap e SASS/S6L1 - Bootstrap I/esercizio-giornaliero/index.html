@@ -13,8 +13,8 @@
 
 <body>
 
-  <header>
-    <nav class="navbar navbar-expand-md bg-primary" data-bs-theme="dark">
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-md bg-primary py-1" data-bs-theme="dark">
       <div class="container">
 
         <!-- Logo EpiShop -->
@@ -111,70 +111,50 @@
         </button>
       </div>
 
+
       <aside class="col-lg-3 d-none d-lg-block">
-        <!-- Sidebar categorie. Visibile solo da lg in su (d-none d-lg-block) -->
         <div class="bg-light p-3 rounded border">
           <h3 class="fs-5 fw-bold mb-3">Categorie</h3>
 
-          <p class="m-0 mb-2">Scarpe</p>
-          <p class="m-0 mb-2">T-shirt</p>
-          <p class="m-0 mb-2">Borse</p>
-          <p class="m-0 mb-2">Accessori</p>
+          <button type="button" class="categoria-aside active" data-categoria="tutti">Tutti</button>
+          <button type="button" class="categoria-aside" data-categoria="scarpe">Scarpe</button>
+          <button type="button" class="categoria-aside" data-categoria="abbigliamento">Abbigliamento</button>
+          <button type="button" class="categoria-aside" data-categoria="accessori">Accessori</button>
         </div>
       </aside>
 
-      <section class="col-12 col-lg-9">
+
+      <section id="prodotti" class="col-12 col-lg-9">
         <!-- Griglia prodotti responsive (1 / 2 / 3 / 4 per riga in base al breakpoint) -->
         <h2 class="fs-3 fw-bold text-center text-md-start mb-4">
           Prodotti in evidenza
           <span class="badge bg-danger fs-6">-30%</span>
         </h2>
+
+        <div id="filtri" class="mb-4 d-lg-none">
+          <button type="button" class="btn btn-outline-primary me-2 mb-2 active" data-categoria="tutti">Tutti</button>
+
+          <button type="button" class="btn btn-outline-primary me-2 mb-2" data-categoria="scarpe">Scarpe</button>
+
+          <button type="button" class="btn btn-outline-primary me-2 mb-2"
+            data-categoria="abbigliamento">Abbigliamento</button>
+
+          <button type="button" class="btn btn-outline-primary me-2 mb-2" data-categoria="accessori">Accessori</button>
+        </div>
+
+        <p class="text-muted mb-3">
+          Mostrati: <span id="contatore">6</span> su 6
+        </p>
+
         <div class="row g-3" id="listaProdotti"></div>
-        <!-- <div class="col-12 col-md-6 col-xl-4">
-            <div class="card shadow-sm">
-              <img src="https://placehold.co/300x180" class="card-img-top" alt="Sneaker Run">
-              <div class="card-body">
-                <h3 class="card-title fs-5 fw-bold">Sneaker Run</h3>
-                <p class="card-text text-muted">Scarpa leggera per la corsa, suola in gomma traspirante.</p>
-                <p class="fw-bold">€ 89,00</p>
-                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
-                  data-bs-target="#modalSneaker">Dettagli</button>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-12 col-md-6 col-xl-4">
-            <div class="card shadow-sm">
-              <img src="https://placehold.co/300x180" class="card-img-top" alt="T-shirt basic">
-              <div class="card-body">
-                <h3 class="card-title fs-5 fw-bold">T-shirt basic</h3>
-                <p class="card-text text-muted">T-shirt in cotone morbido, disponibile in diversi colori.</p>
-                <p class="fw-bold">€ 19,00</p>
-                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
-                  data-bs-target="#modalTshirt">Dettagli</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-xl-4">
-            <div class="card shadow-sm">
-              <img src="https://placehold.co/300x180" class="card-img-top" alt="Borsa city">
-              <div class="card-body">
-                <h3 class="card-title fs-5 fw-bold">Borsa city</h3>
-                <p class="card-text text-muted">Borsa pratica e capiente, ideale per tutti i giorni.</p>
-                <p class="fw-bold">€ 49,00</p>
-                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
-                  data-bs-target="#modalBorsa">Dettagli</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        <p id="totaleCatalogo" class="text-end mt-3 mb-0"></p>
       </section>
 
     </div>
   </main>
 
-  <footer class="bg-dark text-white py-4 mt-5">
+  <footer id="contatti" class="bg-dark text-white py-4 mt-5">
     <!-- Footer scuro centrato con copyright -->
     <div class="container text-center">
       <p class="m-0">© 2026 EpiShop — tutti i diritti riservati</p>

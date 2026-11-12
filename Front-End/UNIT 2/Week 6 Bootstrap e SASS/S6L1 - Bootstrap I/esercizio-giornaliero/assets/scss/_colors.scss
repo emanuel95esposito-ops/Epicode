@@ -1,5 +1,5 @@
 // COLORE PRINCIPALE
-$brand-primary: #0d6efd;
+$brand-primary: #1F7A4C;
 
 // TEMA CHIARO
 $light-bg: #fafafa;
@@ -22,3 +22,8 @@ $shadow-card-hover: 0 8px 20px rgba(0, 0, 0, 0.18);
 // OMBRE TEMA SCURO
 $shadow-card-dark: 0 2px 6px rgba(255, 255, 255, 0.12);
 $shadow-card-hover-dark: 0 8px 20px rgba(255, 255, 255, 0.25);
+
+// COLORI DELLE CATEGORIE
+$scarpe: hsl(220, 60%, 40%);
+$abbigliamento: hsl(0, 70%, 50%);
+$accessori: hsl(45, 90%, 50%);

@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'colors' as colors;
 
 // VARIABILI GENERALI
@@ -41,10 +42,37 @@ $radius-base: 10px;
         .modal-footer {
             border-color: $bordo;
         }
+
+        &.scarpe {
+            border-top: 4px solid colors.$scarpe;
+        }
+
+        &.abbigliamento {
+            border-top: 4px solid colors.$abbigliamento;
+        }
+
+        &.accessori {
+            border-top: 4px solid colors.$accessori;
+        }
+    }
+
+}
+
+// MIXIN CARD PER CATEGORIA
+
+@mixin card-prodotto($accent) {
+    border-top: 4px solid $accent;
+
+    .card-title {
+        color: $accent;
+    }
+
+    &:hover {
+        box-shadow: 0 6px 18px rgba($accent, 0.3);
     }
 }
 
-// TEMA CHIARO (PREDEFINITO)
+// TEMA CHIARO
 
 body {
     @include tema(colors.$light-bg,
@@ -54,21 +82,102 @@ body {
         colors.$light-muted );
 
     transition: background-color 200ms ease, color 200ms ease;
-}
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
 
-// EFFETTO HOVER DELLE CARD
-.card {
-    border-radius: $radius-base;
-    box-shadow: colors.$shadow-card;
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    main {
+        flex: 1;
+    }
 
-    @include solo-su(768px) {
-        &:hover {
-            transform: translateY(-4px);
-            box-shadow: colors.$shadow-card-hover;
+    aside {
+        .categoria-aside {
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin-bottom: 8px;
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+
+            &:hover,
+            &.active {
+                font-weight: bold;
+                text-decoration: underline;
+            }
         }
     }
+
+    .card {
+        border-radius: $radius-base;
+        box-shadow: colors.$shadow-card;
+        transition: transform 200ms ease, box-shadow 200ms ease;
+
+        @include solo-su(768px) {
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: colors.$shadow-card-hover;
+            }
+        }
+
+        &.scarpe {
+            @include card-prodotto(colors.$scarpe);
+        }
+
+        &.abbigliamento {
+            @include card-prodotto(colors.$abbigliamento);
+        }
+
+        &.accessori {
+            @include card-prodotto(colors.$accessori);
+        }
+    }
+
+    .btn-primary,
+    .bg-primary,
+    .navbar.bg-primary {
+        background-color: colors.$brand-primary !important;
+        border-color: colors.$brand-primary !important;
+    }
+
+    .text-primary {
+        color: colors.$brand-primary !important;
+    }
+
+    .btn-primary {
+        &:hover {
+            background-color: color.adjust(colors.$brand-primary,
+                    $lightness: -10%,
+                    $space: hsl) !important;
+        }
+    }
+
+    .btn-outline-primary {
+        color: colors.$brand-primary !important;
+        border-color: colors.$brand-primary !important;
+
+        &:hover,
+        &.active {
+            background-color: colors.$brand-primary !important;
+            border-color: colors.$brand-primary !important;
+            color: white !important;
+        }
+    }
+
+    #totaleCatalogo {
+        font-size: 1.125rem;
+        font-weight: bold;
+        text-align: right;
+        margin-top: 20px;
+        padding-top: 12px;
+        border-top: 1px solid colors.$light-border;
+    }
 }
+
+
 
 // TEMA SCURO
 
@@ -79,18 +188,44 @@ body.dark {
         colors.$dark-border,
         colors.$dark-muted );
 
-    .navbar {
-        background-color: darken(colors.$brand-primary, 10%) !important; // soluzione deprecata, sotto soluzione aggiornata
-        //     aggiungiungendo ad iizio pagina --> @use 'sass:color <-- posso usare le funzioni SASS per modificare i colori.
-        //     background-color: color.adjust(
-        //     colors.$brand-primary,
-        //     $lightness: -10%,
-        //     $space: hsl --> indica di utilizzare il modello colore HSL.
-        // ) !important; 
+    // .navbar { IN DARK MODE NON DEVE PIU 
+    //     // background-color: darken(colors.$brand-primary, 10%) !important; // soluzione deprecata, sotto soluzione aggiornata
+    //     // aggiungiungendo ad inizio pagina --> @use 'sass:color <-- posso usare le funzioni SASS per modificare i colori.
+    //         background-color: color.adjust(
+    //         colors.$brand-primary,
+    //         $lightness: -10%,
+    //         $space: hsl /*--> indica di utilizzare il modello colore HSL.*/
+    //     ) !important; 
+    // }
+
+    .btn-outline-primary {
+        color: color.adjust(colors.$brand-primary, $lightness: 20%, $space: hsl) !important;
+        border-color: color.adjust(colors.$brand-primary, $lightness: 20%, $space: hsl) !important;
+
+        &:hover,
+        &.active {
+            color: white !important;
+        }
+    }
+
+    .text-muted {
+        color: colors.$dark-muted !important;
     }
 
     .card {
         box-shadow: colors.$shadow-card-dark;
+
+        &.scarpe {
+            border-top-color: colors.$scarpe;
+        }
+
+        &.abbigliamento {
+            border-top-color: colors.$abbigliamento;
+        }
+
+        &.accessori {
+            border-top-color: colors.$accessori;
+        }
 
         @include solo-su(768px) {
             &:hover {
@@ -103,5 +238,9 @@ body.dark {
         .btn-close {
             filter: invert(1) grayscale(100%) brightness(200%);
         }
+    }
+
+    #totaleCatalogo {
+        border-color: colors.$dark-border;
     }
 }

@@ -24,20 +24,106 @@ body .modal-content .modal-header,
 body .modal-content .modal-footer {
   border-color: #e0e0e0;
 }
+body .modal-content.scarpe {
+  border-top: 4px solid hsl(220, 60%, 40%);
+}
+body .modal-content.abbigliamento {
+  border-top: 4px solid hsl(0, 70%, 50%);
+}
+body .modal-content.accessori {
+  border-top: 4px solid hsl(45, 90%, 50%);
+}
 body {
   transition: background-color 200ms ease, color 200ms ease;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
-
-.card {
+body main {
+  flex: 1;
+}
+body aside .categoria-aside {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 8px;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+body aside .categoria-aside:hover, body aside .categoria-aside.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+body .card {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 @media (min-width: 768px) {
-  .card:hover {
+  body .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   }
+}
+body .card.scarpe {
+  border-top: 4px solid hsl(220, 60%, 40%);
+}
+body .card.scarpe .card-title {
+  color: hsl(220, 60%, 40%);
+}
+body .card.scarpe:hover {
+  box-shadow: 0 6px 18px rgba(16%, 32%, 64%, 0.3);
+}
+body .card.abbigliamento {
+  border-top: 4px solid hsl(0, 70%, 50%);
+}
+body .card.abbigliamento .card-title {
+  color: hsl(0, 70%, 50%);
+}
+body .card.abbigliamento:hover {
+  box-shadow: 0 6px 18px rgba(85%, 15%, 15%, 0.3);
+}
+body .card.accessori {
+  border-top: 4px solid hsl(45, 90%, 50%);
+}
+body .card.accessori .card-title {
+  color: hsl(45, 90%, 50%);
+}
+body .card.accessori:hover {
+  box-shadow: 0 6px 18px rgba(95%, 72.5%, 5%, 0.3);
+}
+body .btn-primary,
+body .bg-primary,
+body .navbar.bg-primary {
+  background-color: #1F7A4C !important;
+  border-color: #1F7A4C !important;
+}
+body .text-primary {
+  color: #1F7A4C !important;
+}
+body .btn-primary:hover {
+  background-color: rgb(8.1045751634%, 31.8954248366%, 19.8692810458%) !important;
+}
+body .btn-outline-primary {
+  color: #1F7A4C !important;
+  border-color: #1F7A4C !important;
+}
+body .btn-outline-primary:hover, body .btn-outline-primary.active {
+  background-color: #1F7A4C !important;
+  border-color: #1F7A4C !important;
+  color: white !important;
+}
+body #totaleCatalogo {
+  font-size: 1.125rem;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
 }
 
 body.dark {
@@ -66,11 +152,36 @@ body.dark .modal-content .modal-header,
 body.dark .modal-content .modal-footer {
   border-color: #555555;
 }
-body.dark .navbar {
-  background-color: rgb(0.6910961106%, 34.2092574735%, 83.6226293796%) !important;
+body.dark .modal-content.scarpe {
+  border-top: 4px solid hsl(220, 60%, 40%);
+}
+body.dark .modal-content.abbigliamento {
+  border-top: 4px solid hsl(0, 70%, 50%);
+}
+body.dark .modal-content.accessori {
+  border-top: 4px solid hsl(45, 90%, 50%);
+}
+body.dark .btn-outline-primary {
+  color: rgb(20.2614379085%, 79.7385620915%, 49.6732026144%) !important;
+  border-color: rgb(20.2614379085%, 79.7385620915%, 49.6732026144%) !important;
+}
+body.dark .btn-outline-primary:hover, body.dark .btn-outline-primary.active {
+  color: white !important;
+}
+body.dark .text-muted {
+  color: #bfc4cc !important;
 }
 body.dark .card {
   box-shadow: 0 2px 6px rgba(255, 255, 255, 0.12);
+}
+body.dark .card.scarpe {
+  border-top-color: hsl(220, 60%, 40%);
+}
+body.dark .card.abbigliamento {
+  border-top-color: hsl(0, 70%, 50%);
+}
+body.dark .card.accessori {
+  border-top-color: hsl(45, 90%, 50%);
 }
 @media (min-width: 768px) {
   body.dark .card:hover {
@@ -79,6 +190,9 @@ body.dark .card {
 }
 body.dark .modal-content .btn-close {
   filter: invert(1) grayscale(100%) brightness(200%);
+}
+body.dark #totaleCatalogo {
+  border-color: #555555;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,68 @@
+{
+    "persons": [
+        {
+            "id": 1,
+            "nome": "Mario",
+            "cognome": "Rossi",
+            "eta": 25,
+            "iscritto": true,
+            "linguaggi": [
+                "HTML",
+                "CSS"
+            ],
+            "indirizzo": {
+                "via": "Roma",
+                "civico": 8,
+                "citta": "Milano"
+            }
+        },
+        {
+            "id": 2,
+            "nome": "Aldo",
+            "cognome": "Bianchi",
+            "eta": 27,
+            "iscritto": false,
+            "linguaggi": [
+                "C#",
+                "Python"
+            ],
+            "indirizzo": {
+                "via": "Libertà",
+                "civico": 26,
+                "citta": "Napoli"
+            }
+        },
+        {
+            "id": 3,
+            "nome": "Giovanna",
+            "cognome": "Verdi",
+            "eta": 22,
+            "iscritto": true,
+            "linguaggi": [
+                "Ruby"
+            ],
+            "indirizzo": {
+                "via": "Belvedere",
+                "civico": "14b",
+                "citta": "Roma"
+            }
+        }
+    ],
+    "courses": [
+        {
+            "azienda": "Epicode",
+            "corsi": [
+                "Full-Stack",
+                "Data analysys",
+                "Cyber Security"
+            ]
+        },
+        {
+            "azienda": "Naviganet",
+            "corsi": [
+                "Office automation",
+                "Agentic IA"
+            ]
+        }
+    ]
+}

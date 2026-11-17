@@ -33,6 +33,36 @@ class Libro {
     formato() {
         return "cartaceo";
     }
+
+    toJSON() {
+        return {
+            ...this,
+            id: this.#id
+        };
+    }
+
+    static fromJSON(dati) {
+        const libro = new this(
+            dati.titolo,
+            dati.autore,
+            dati.anno,
+            dati.dimensioneMb ?? dati.durataMinuti
+        );
+
+        if (dati.id) {
+            libro.#id = dati.id;
+        }
+
+        libro.letto = dati.letto === true;
+
+        return libro;
+    }
+
+    static daStringa(s) {
+        const [titolo, autore, anno] = s.split("|");
+
+        return new Libro(titolo, autore, Number(anno));
+    }
 }
 
 class LibroDigitale extends Libro {
@@ -47,9 +77,52 @@ class LibroDigitale extends Libro {
 }
 
 
+class LibroAudio extends Libro {
+    constructor(_titolo, _autore, _anno, _durataMinuti) {
+        super(_titolo, _autore, _anno);
+        this.durataMinuti = _durataMinuti;
+    }
+
+    formato() {
+        return `audio (${this.durataMinuti} min)`;
+    }
+}
+
+
+
+// === Configurazione ===
+
+const STORAGE_KEY = "libri";
+
+
 // === Stato (array di libri) ===
 
-const libri = [];
+let libri = caricaLibri();
+let filtroAttivo = "tutti";
+let ordinamentoAttivo = "titolo";
+
+// === Persistenza ===
+
+function salvaLibri() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(libri));
+}
+
+
+function caricaLibri() {
+    const dati = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
+
+    return dati.map((libro) => {
+        if (libro.durataMinuti !== undefined) {
+            return LibroAudio.fromJSON(libro);
+        }
+
+        if (libro.dimensioneMb !== undefined) {
+            return LibroDigitale.fromJSON(libro);
+        }
+
+        return Libro.fromJSON(libro);
+    });
+}
 
 
 
@@ -78,25 +151,47 @@ function renderLibri() {
     const listaLibri = document.getElementById("lista-libri");
     const contatore = document.getElementById("contatore");
     const righe = [];
+    const libriFiltrati = libri.filter((libro) => {
+        if (filtroAttivo === "letti") {
+            return libro.letto;
+        }
 
-    libri.forEach((libro) => {
+        if (filtroAttivo === "da-leggere") {
+            return !libro.letto;
+        }
+
+        return true;
+    });
+    const libriOrdinati = libriFiltrati.toSorted((a, b) => {
+        if (ordinamentoAttivo === "titolo") {
+            return a.titolo.localeCompare(b.titolo, "it");
+        }
+
+        return a.anno - b.anno || a.titolo.localeCompare(b.titolo, "it");
+    });
+
+    libriOrdinati.forEach((libro) => {
         const li = creaElemento("li", libro.letto ? "letto" : "");
         li.dataset.id = libro.getId();
 
         const info = creaElemento("div", "info", li);
         creaElemento("strong", "", info, libro.titolo);
-        creaElemento("span", "badge", info, libro.formato());
+        creaElemento("span", "badge rounded-pill text-bg-light ms-2", info, libro.formato());
         creaElemento("div", "meta", info, `${libro.autore} — ${libro.anno}`);
 
-        const azioni = creaElemento("div", "azioni", li);
+        const azioni = creaElemento("div", "azioni d-flex align-items-center gap-2", li);
 
         if (libro.letto) {
             creaElemento("span", "stato-letto", azioni, "✓ letto");
         } else {
-            const bottone = creaElemento("button", "", azioni, "Segna come letto");
+            const bottone = creaElemento("button", "btn btn-outline-secondary btn-sm", azioni, "Segna come letto");
             bottone.type = "button";
             bottone.dataset.azione = "leggi";
         }
+
+        const bottoneRimuovi = creaElemento("button", "btn btn-outline-secondary btn-sm", azioni, "Rimuovi");
+        bottoneRimuovi.type = "button";
+        bottoneRimuovi.dataset.azione = "rimuovi";
 
         righe.push(li);
     });
@@ -108,13 +203,28 @@ function renderLibri() {
 
 // === Eventi ===
 
+const dimensioneInput = document.getElementById("dimensioneMb");
 const formatoSelect = document.getElementById("formato");
 const campoDimensione = document.getElementById("campo-dimensione");
 const formAggiungiLibro = document.getElementById("aggiungi-libro");
 const listaLibri = document.getElementById("lista-libri");
+const svuotaTutto = document.getElementById("svuota-tutto");
+const durataInput = document.getElementById("durataMinuti");
+const campoDurata = document.getElementById("campo-durata");
+const esportaJSON = document.getElementById("esporta-json");
+const filtri = document.querySelector(".filtri");
+const ordinamentoSelect = document.getElementById("ordina-libri");
+
 
 formatoSelect.addEventListener("change", (e) => {
-    campoDimensione.hidden = e.target.value !== "digitale";
+    const isDigitale = e.target.value === "digitale";
+    const isAudio = e.target.value === "audio";
+
+    campoDimensione.hidden = !isDigitale;
+    dimensioneInput.required = isDigitale;
+
+    campoDurata.hidden = !isAudio;
+    durataInput.required = isAudio;
 });
 
 
@@ -123,28 +233,107 @@ formAggiungiLibro.addEventListener("submit", (e) => {
 
     const dati = Object.fromEntries(new FormData(e.target));
 
-    const nuovoLibro = dati.formato === "digitale"
-        ? new LibroDigitale(dati.titolo, dati.autore, Number(dati.anno), Number(dati.dimensioneMb))
-        : new Libro(dati.titolo, dati.autore, Number(dati.anno));
+    let nuovoLibro;
+
+    if (dati.formato === "digitale") {
+        nuovoLibro = new LibroDigitale(
+            dati.titolo,
+            dati.autore,
+            Number(dati.anno),
+            Number(dati.dimensioneMb)
+        );
+    } else if (dati.formato === "audio") {
+        nuovoLibro = new LibroAudio(
+            dati.titolo,
+            dati.autore,
+            Number(dati.anno),
+            Number(dati.durataMinuti)
+        );
+    } else {
+        nuovoLibro = new Libro(
+            dati.titolo,
+            dati.autore,
+            Number(dati.anno)
+        );
+    }
 
     libri.push(nuovoLibro);
+    salvaLibri();
     renderLibri();
 
     e.target.reset();
     campoDimensione.hidden = true;
+    dimensioneInput.required = false;
+    campoDurata.hidden = true;
+    durataInput.required = false;
 });
 
 listaLibri.addEventListener("click", (e) => {
-    const bottone = e.target.closest("[data-azione='leggi']");
-
+    const bottone = e.target.closest("[data-azione]");
     if (!bottone) return;
 
     const id = bottone.closest("li").dataset.id;
+    const azione = bottone.dataset.azione;
 
-    const libro = libri.find((libro) => libro.getId() === id);
+    if (azione === "leggi") {
+        const libro = libri.find((libro) => libro.getId() === id);
+        if (!libro) return;
+        libro.segnaComeLetto();
 
-    if (!libro) return;
+    } else if (azione === "rimuovi") {
+        libri = libri.filter((libro) => libro.getId() !== id);
 
-    libro.segnaComeLetto();
+    } else {
+        return;
+    }
+
+    salvaLibri();
     renderLibri();
 });
+
+svuotaTutto.addEventListener("click", () => {
+    libri = [];
+    localStorage.removeItem(STORAGE_KEY);
+    renderLibri();
+});
+
+
+esportaJSON.addEventListener("click", () => {
+    const json = JSON.stringify(libri, null, 2);
+
+    const blob = new Blob([json], {   //window.open("data:application/json;charset=utf-8," + encodeURIComponent(json), "_blank");
+        type: "application/json"      //questa versione viene bloccata da Chrome per motivi di sicurezza
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    window.open(url, "_blank");
+});
+
+
+filtri.addEventListener("click", (e) => {
+    const bottone = e.target.closest("[data-filtro]");
+
+    if (!bottone) return;
+
+    filtroAttivo = bottone.dataset.filtro;
+
+    filtri.querySelectorAll("[data-filtro]").forEach((btn) => {
+        const attivo = btn.dataset.filtro === filtroAttivo;
+
+        btn.classList.toggle("btn-primary", attivo);
+        btn.classList.toggle("btn-outline-secondary", !attivo);
+    });
+
+    renderLibri();
+});
+
+ordinamentoSelect.addEventListener("change", (e) => {
+    ordinamentoAttivo = e.target.value;
+    renderLibri();
+});
+
+// === Inizializzazione ===
+
+renderLibri();
+

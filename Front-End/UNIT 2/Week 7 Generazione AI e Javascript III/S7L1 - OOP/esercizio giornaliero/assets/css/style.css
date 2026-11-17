@@ -1,22 +1,13 @@
 /* Mini-libreria — Settimana VII Giorno I
    Stile minimal: il focus è sulla logica JS, non sul layout. */
 
-
-* { box-sizing: border-box; }
-
 body {
-  margin: 0;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  background: #f7f7f7;
+  background-color: #f7f7f7;
   color: #1a1a1a;
 }
 
-.container {
+.library-container {
   max-width: 720px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 .site-header {
@@ -24,10 +15,80 @@ body {
   color: white;
   padding: 30px 20px;
   text-align: center;
+
+  h1 {
+    margin: 0 0 8px;
+  }
+
+  p {
+    margin: 0;
+    opacity: 0.85;
+  }
 }
 
-.site-header h1 { margin: 0 0 8px; }
-.site-header p  { margin: 0; opacity: 0.85; }
-
-
 /* Aggiungi qui le tue regole per form, lista libri, bottoni, ecc. */
+
+/* Form */
+
+.form-section {
+  .btn-primary {
+    --bs-btn-bg: hsl(220, 50%, 25%);
+    --bs-btn-border-color: hsl(220, 50%, 25%);
+
+    --bs-btn-hover-bg: hsl(220, 50%, 20%);
+    --bs-btn-hover-border-color: hsl(220, 50%, 20%);
+
+    --bs-btn-active-bg: hsl(220, 50%, 18%);
+    --bs-btn-active-border-color: hsl(220, 50%, 18%);
+  }
+}
+
+/* Lista libri */
+
+#lista-libri {
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background-color: white;
+    border-left: 4px solid hsl(220, 50%, 25%);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+
+    /* Libri letti */
+    &.letto {
+      border-left-color: #65ad7a;
+      background-color: #fafafa;
+
+      .info,
+      .azioni {
+        opacity: 0.6;
+      }
+
+    }
+
+    /* Informazioni libro */
+    .info {
+      .meta {
+        font-size: 14px;
+        color: #6c757d;
+      }
+    }
+
+    /* Pulsanti */
+    .azioni {
+      flex-shrink: 0;
+
+      .btn {
+        --bs-btn-color: #1a1a1a;
+        --bs-btn-border-color: #d6d6d6;
+        --bs-btn-hover-color: #1a1a1a;
+        --bs-btn-hover-bg: #f2f2f2;
+        --bs-btn-hover-border-color: #b8b8b8;
+      }
+    }
+  }
+}

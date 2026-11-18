@@ -20,6 +20,28 @@
 
   <main class="container library-container py-4">
 
+
+    <section class="cerca-section bg-white rounded shadow-sm p-4 mb-4">
+
+      <h2 class="h4 fw-bold mb-3">Cerca</h2>
+
+      <div class="campo">
+        <label for="cerca" class="form-label">Titolo o autore</label>
+        <input type="text" id="cerca" class="form-control" placeholder="es. harari, tolkien, sapiens">
+      </div>
+
+      <div id="spinner" class="spinner my-3" hidden>
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        Caricamento in corso...
+      </div>
+
+      <div id="errore" class="alert alert-danger mt-3" hidden></div>
+
+      <ul id="risultati" class="risultati list-unstyled mt-3 mb-0"></ul>
+
+    </section>
+
+
     <section class="form-section bg-white rounded shadow-sm p-4 mb-4">
       <h2 class="h4 fw-bold mb-3">Aggiungi un libro</h2>
 
@@ -116,6 +138,13 @@
     </section>
 
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.min.js"
+    integrity="sha384-89aa4glufciPv46aKltztWQEmk+Tu9W2RhzXr6VcnUUEub7F8+06RcL2RYLCOHUq"
+    crossorigin="anonymous"></script>
 
 </body>
 

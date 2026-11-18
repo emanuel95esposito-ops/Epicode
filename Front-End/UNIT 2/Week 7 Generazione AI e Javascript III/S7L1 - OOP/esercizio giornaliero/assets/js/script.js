@@ -93,6 +93,7 @@ class LibroAudio extends Libro {
 // === Configurazione ===
 
 const STORAGE_KEY = "libri";
+const RICERCA_KEY = "ultimaRicercaOpenLibrary";
 
 
 // === Stato (array di libri) ===
@@ -198,10 +199,124 @@ function renderLibri() {
 
     listaLibri.replaceChildren(...righe);
     contatore.textContent = libri.length;
+
+    risultatiRicerca.querySelectorAll("button[data-titolo]").forEach((bottone) => {
+        const presente = libri.some((libro) =>
+            libro.titolo === bottone.dataset.titolo &&
+            libro.autore === bottone.dataset.autore &&
+            libro.anno === (Number(bottone.dataset.anno) || 0)
+        );
+
+        bottone.textContent = presente ? "✓ Aggiunto" : "Aggiungi";
+        bottone.disabled = presente;
+    });
+}
+
+// === Ricerca Open Library ===
+
+let controller;
+let timeoutId;
+
+function mostraSpinner() {
+    spinner.hidden = false;
+    errore.hidden = true;
+}
+
+function nascondiSpinner() {
+    spinner.hidden = true;
+}
+
+function mostraErrore(msg) {
+    errore.textContent = msg;
+    errore.hidden = false;
+}
+
+function cerca(query) {
+    controller?.abort();
+    controller = new AbortController();
+
+    const { signal } = controller;
+
+    mostraSpinner();
+
+    const url = new URL("https://openlibrary.org/search.json");
+
+    url.searchParams.set("q", query);
+    url.searchParams.set("limit", 10);
+
+    fetch(url, { signal })
+        .then((risposta) => {
+            if (!risposta.ok) {
+                throw new Error(`HTTP ${risposta.status}`);
+            }
+
+            return risposta.json();
+        })
+        .then((dati) => {
+            renderRisultati(dati.docs);
+        })
+        .catch((err) => {
+            if (err.name === "AbortError") return;
+
+            mostraErrore(`Errore durante la ricerca: ${err.message}`);
+        })
+        .finally(() => {
+            if (!signal.aborted) {
+                nascondiSpinner();
+            }
+        });
 }
 
 
-// === Eventi ===
+function renderRisultati(docs) {
+    const risultati = document.getElementById("risultati");
+    const libriConAutore = docs.filter((libro) =>
+        libro.author_name?.length > 0
+    );
+
+    if (libriConAutore.length === 0) {
+        const li = creaElemento("li", "", undefined, "Nessun risultato.");
+        risultati.replaceChildren(li);
+        return;
+    }
+
+    const righe = libriConAutore.map((libro) => {
+        const autore = libro.author_name?.[0] ?? "Autore sconosciuto";
+        const anno = libro.first_publish_year ?? "?";
+
+        const li = creaElemento("li", "risultato");
+
+        const info = creaElemento("div", "info", li);
+        creaElemento("strong", "", info, libro.title);
+        creaElemento("div", "meta", info, `${autore} — ${anno}`);
+
+        const bottone = creaElemento("button", "btn btn-success btn-sm", li, "Aggiungi");
+        bottone.type = "button";
+        bottone.dataset.titolo = libro.title;
+        bottone.dataset.autore = autore;
+        bottone.dataset.anno = anno;
+
+        const presente = libri.some((l) =>
+            l.titolo === libro.title &&
+            l.autore === autore &&
+            l.anno === (Number(anno) || 0)
+        );
+
+        bottone.textContent = presente ? "✓ Aggiunto" : "Aggiungi";
+        bottone.disabled = presente;
+
+        const dettagli = creaElemento("button", "btn btn-outline-primary btn-sm", li, "Dettagli");
+        dettagli.type = "button";
+        dettagli.dataset.key = libro.key;
+
+        return li;
+    });
+
+    risultati.replaceChildren(...righe);
+}
+
+
+// === Elementi DOM ===
 
 const dimensioneInput = document.getElementById("dimensioneMb");
 const formatoSelect = document.getElementById("formato");
@@ -214,7 +329,12 @@ const campoDurata = document.getElementById("campo-durata");
 const esportaJSON = document.getElementById("esporta-json");
 const filtri = document.querySelector(".filtri");
 const ordinamentoSelect = document.getElementById("ordina-libri");
+const spinner = document.getElementById("spinner");
+const errore = document.getElementById("errore");
+const cercaInput = document.getElementById("cerca");
+const risultatiRicerca = document.getElementById("risultati");
 
+// === Eventi ===
 
 formatoSelect.addEventListener("change", (e) => {
     const isDigitale = e.target.value === "digitale";
@@ -333,7 +453,93 @@ ordinamentoSelect.addEventListener("change", (e) => {
     renderLibri();
 });
 
+
+cercaInput.addEventListener("input", (e) => {
+    const query = e.target.value.trim();
+
+    clearTimeout(timeoutId);
+    controller?.abort();
+
+    risultatiRicerca.replaceChildren();
+    errore.hidden = true;
+
+    if (query.length < 3) {
+        localStorage.removeItem(RICERCA_KEY);
+        nascondiSpinner();
+        return;
+    }
+
+    timeoutId = setTimeout(() => {
+        localStorage.setItem(RICERCA_KEY, query);
+        cerca(query);
+    }, 400);
+});
+
+risultatiRicerca.addEventListener("click", (e) => {
+
+    const bottoneDettagli = e.target.closest("button[data-key]");
+
+    if (bottoneDettagli) {
+        const url = `https://openlibrary.org${bottoneDettagli.dataset.key}.json`;
+
+        fetch(url)
+            .then((risposta) => {
+                if (!risposta.ok) {
+                    throw new Error(`HTTP ${risposta.status}`);
+                }
+
+                return risposta.json();
+            })
+            .then((dati) => {
+                const descrizione = typeof dati.description === "string"
+                    ? dati.description
+                    : dati.description?.value ?? "Nessuna descrizione disponibile.";
+
+                alert(descrizione);
+            })
+            .catch((err) => {
+                alert(`Errore nel caricamento dei dettagli: ${err.message}`);
+            });
+
+        return;
+    }
+
+    const bottone = e.target.closest("button[data-titolo]");
+
+    if (!bottone) return;
+
+    const titolo = bottone.dataset.titolo;
+    const autore = bottone.dataset.autore;
+    const anno = Number(bottone.dataset.anno) || 0;
+
+
+    const presente = libri.some((libro) =>
+        libro.titolo === titolo &&
+        libro.autore === autore &&
+        libro.anno === anno
+    );
+
+    if (presente) return;
+
+
+    const nuovoLibro = new Libro(titolo, autore, anno);
+
+    libri.push(nuovoLibro);
+    salvaLibri();
+    renderLibri();
+
+    bottone.textContent = "✓ Aggiunto";
+    bottone.disabled = true;
+});
+
+
 // === Inizializzazione ===
 
 renderLibri();
 
+const ultimaRicerca = localStorage.getItem(RICERCA_KEY);
+
+if (ultimaRicerca) {
+    cercaInput.value = ultimaRicerca;
+    cerca(ultimaRicerca);
+}

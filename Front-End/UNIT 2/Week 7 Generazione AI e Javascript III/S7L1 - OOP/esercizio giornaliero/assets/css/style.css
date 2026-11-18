@@ -92,3 +92,35 @@ body {
     }
   }
 }
+
+/* === Risultati Open Library === */
+
+.risultati {
+    .risultato {
+        padding: 16px 0;
+        border-bottom: 1px solid #e0e0e0;
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info {
+            margin-bottom: 10px;
+
+            strong {
+                display: block;
+                margin-bottom: 4px;
+            }
+
+            .meta {
+                font-size: 14px;
+                color: #6c757d;
+            }
+        }
+
+        .btn + .btn {
+            margin-left: 8px;
+        }
+    }
+}

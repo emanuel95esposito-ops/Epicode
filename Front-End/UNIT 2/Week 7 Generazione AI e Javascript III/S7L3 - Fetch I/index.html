@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>JS asincrono 1</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-yEPZ7jP9S0QKiUQ0m3jjsO4ProIW7wvR9gXkI7JOGa2XVsw53Yke2bsdkBbjmmiX"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+	</head>
+	<body>
+		<header class="container-fluid bg-dark text-light text-center">
+			<h1>JS asincrono parte prima</h1>
+		</header>
+
+		<div class="container d-flex justify-content-center">
+			<div class="spinner-border text-danger" role="status">
+				<span class="visually-hidden">Loading...</span>
+			</div>
+			&nbsp;
+			<h3 id="info">Stanno arrivando i libri...</h3>
+		</div>
+
+		<hr />
+
+		<div class="container">
+			<div id="semaforo">⚪</div>
+			<div
+				class="spinner-border text-danger"
+				role="status"
+				id="spinSemaforo"
+			>
+				<span class="visually-hidden">Loading...</span>
+			</div>
+			<p id="testo">Stiamo aspettando la promise del semaforo...</p>
+			<h3 id="promiseState"></h3>
+		</div>
+
+		<hr />
+
+		<div class="container">
+			<div class="row" id="users"></div>
+		</div>
+
+		<div class="container">
+			<form>
+				<div class="row">
+					<div class="col-lg-4">
+						<label for="userName" class="form-label"
+							>Nome completo</label
+						>
+						<input type="text" id="userName" class="form-control" />
+					</div>
+					<div class="col-lg-4">
+						<label for="userAlias" class="form-label"
+							>Uasername scelto</label
+						>
+						<input
+							type="text"
+							id="userAlias"
+							class="form-control"
+						/>
+					</div>
+					<div class="col-lg-4">
+						<label for="userEmail" class="form-label">Email</label>
+						<input
+							type="email"
+							id="userEmail"
+							class="form-control"
+						/>
+					</div>
+					<button type="submit" class="btn btn-success w-25 mt-3">REGISTRA</button>
+				</div>
+			</form>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.min.js"
+			integrity="sha384-89aa4glufciPv46aKltztWQEmk+Tu9W2RhzXr6VcnUUEub7F8+06RcL2RYLCOHUq"
+			crossorigin="anonymous"
+		></script>
+		<script src="assets/js/script.js"></script>
+	</body>
+</html>

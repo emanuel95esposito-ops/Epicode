@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "email": "dadegi@gmail.com",
+      "password": "$2a$10$S.CMUwRVp4EyxOUN5ff.OuVZ9bhOiffE579GtFKo2CWBz7J/thlr.",
+      "userName": "Dario Del Giudice",
+      "id": 1
+    },
+    {
+      "email": "info@naviganet.biz",
+      "password": "$2a$10$tBiomY.s0mgWiCZXXfiLreLB4WgJ5L5FD67LQbnFc5B6NFR8bKG9q",
+      "userName": "Dario Del Giudice",
+      "id": 2
+    },
+    {
+      "email": "prova@prova.com",
+      "password": "$2a$10$vf4fvzrK6rpi4s/mLViTMuXy8KnMzo/CeGcMD8mI5Vo1Li964MlI.",
+      "userName": "Paolino Paperino",
+      "id": 3
+    },
+    {
+      "email": "pippo@pippo.com",
+      "password": "$2a$10$00vq16XGMrMBUXD6ys54G.MswXAh.PTyxcJjpFtp8EvATUiT4eUHO",
+      "userName": "Giovanni",
+      "id": 4
+    }
+  ]
+}

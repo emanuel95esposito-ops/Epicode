@@ -1,0 +1,25 @@
+{
+  "name": "fs0326-w7d4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "json-server-auth db.json --port 3001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dadegi/FS0326-W7D4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dadegi/FS0326-W7D4/issues"
+  },
+  "homepage": "https://github.com/dadegi/FS0326-W7D4#readme",
+  "keywords": [],
+  "dependencies": {
+    "json-server": "0.17.4",
+    "json-server-auth": "^2.1.0"
+  }
+}

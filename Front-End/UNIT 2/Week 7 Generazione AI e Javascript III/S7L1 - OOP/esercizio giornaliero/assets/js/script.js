@@ -9,330 +9,27 @@
 // Bonus: bottone "Segna come letto" su ogni elemento, gestito con event delegation.
 
 
-// === Classi ===
+import { Libro, LibroDigitale, LibroAudio } from "../import/classes.js";
+import {
+    renderLibri, nascondiSpinner,
+    formatoSelect, formAggiungiLibro, listaLibri, svuotaTutto, esportaJSON,
+    dimensioneInput, campoDimensione, durataInput, campoDurata,
+    filtri, ordinamentoSelect, errore, cercaInput, risultatiRicerca
+} from "../import/render.js";
+import {
+    libri, filtroAttivo, ordinamentoAttivo,
+    salvaLibri, setLibri, setFiltro, setOrdinamento, svuotaArchivio,
+    getJSON, cerca, annullaRicerca, pianificaRicerca, RICERCA_KEY
+} from "../import/functions.js";
+import { getToken, renderAuthBox, mostraProfilo } from "../../auth/auth.js";
 
-class Libro {
-    #id;
-    letto = false;
 
-    constructor(_titolo, _autore, _anno) {
-        this.#id = crypto.randomUUID();
-        this.titolo = _titolo;
-        this.autore = _autore;
-        this.anno = _anno;
-    }
+// === Aggiornamento della lista ===
 
-    getId() {
-        return this.#id;
-    }
-
-    segnaComeLetto() {
-        this.letto = true;
-    }
-
-    formato() {
-        return "cartaceo";
-    }
-
-    toJSON() {
-        return {
-            ...this,
-            id: this.#id
-        };
-    }
-
-    static fromJSON(dati) {
-        const libro = new this(
-            dati.titolo,
-            dati.autore,
-            dati.anno,
-            dati.dimensioneMb ?? dati.durataMinuti
-        );
-
-        if (dati.id) {
-            libro.#id = dati.id;
-        }
-
-        libro.letto = dati.letto === true;
-
-        return libro;
-    }
-
-    static daStringa(s) {
-        const [titolo, autore, anno] = s.split("|");
-
-        return new Libro(titolo, autore, Number(anno));
-    }
+function aggiornaLista() {
+    renderLibri(libri, filtroAttivo, ordinamentoAttivo);
 }
 
-class LibroDigitale extends Libro {
-    constructor(_titolo, _autore, _anno, _dimensioneMb) {
-        super(_titolo, _autore, _anno);
-        this.dimensioneMb = _dimensioneMb;
-    }
-
-    formato() {
-        return `digitale (${this.dimensioneMb} MB)`;
-    }
-}
-
-
-class LibroAudio extends Libro {
-    constructor(_titolo, _autore, _anno, _durataMinuti) {
-        super(_titolo, _autore, _anno);
-        this.durataMinuti = _durataMinuti;
-    }
-
-    formato() {
-        return `audio (${this.durataMinuti} min)`;
-    }
-}
-
-
-
-// === Configurazione ===
-
-const STORAGE_KEY = "libri";
-const RICERCA_KEY = "ultimaRicercaOpenLibrary";
-
-
-// === Stato (array di libri) ===
-
-let libri = caricaLibri();
-let filtroAttivo = "tutti";
-let ordinamentoAttivo = "titolo";
-
-// === Persistenza ===
-
-function salvaLibri() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(libri));
-}
-
-
-function caricaLibri() {
-    const dati = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
-
-    return dati.map((libro) => {
-        if (libro.durataMinuti !== undefined) {
-            return LibroAudio.fromJSON(libro);
-        }
-
-        if (libro.dimensioneMb !== undefined) {
-            return LibroDigitale.fromJSON(libro);
-        }
-
-        return Libro.fromJSON(libro);
-    });
-}
-
-
-
-// === Render ===
-
-function creaElemento(tag, classe, genitore, testo, id) {
-    const elemento = document.createElement(tag);
-    elemento.className = classe;
-
-    if (testo !== undefined) {
-        elemento.textContent = testo;
-    }
-
-    if (id !== undefined) {
-        elemento.id = id;
-    }
-
-    if (genitore !== undefined) {
-        genitore.appendChild(elemento);
-    }
-
-    return elemento;
-}
-
-function renderLibri() {
-    const listaLibri = document.getElementById("lista-libri");
-    const contatore = document.getElementById("contatore");
-    const righe = [];
-    const libriFiltrati = libri.filter((libro) => {
-        if (filtroAttivo === "letti") {
-            return libro.letto;
-        }
-
-        if (filtroAttivo === "da-leggere") {
-            return !libro.letto;
-        }
-
-        return true;
-    });
-    const libriOrdinati = libriFiltrati.toSorted((a, b) => {
-        if (ordinamentoAttivo === "titolo") {
-            return a.titolo.localeCompare(b.titolo, "it");
-        }
-
-        return a.anno - b.anno || a.titolo.localeCompare(b.titolo, "it");
-    });
-
-    libriOrdinati.forEach((libro) => {
-        const li = creaElemento("li", libro.letto ? "letto" : "");
-        li.dataset.id = libro.getId();
-
-        const info = creaElemento("div", "info", li);
-        creaElemento("strong", "", info, libro.titolo);
-        creaElemento("span", "badge rounded-pill text-bg-light ms-2", info, libro.formato());
-        creaElemento("div", "meta", info, `${libro.autore} — ${libro.anno}`);
-
-        const azioni = creaElemento("div", "azioni d-flex align-items-center gap-2", li);
-
-        if (libro.letto) {
-            creaElemento("span", "stato-letto", azioni, "✓ letto");
-        } else {
-            const bottone = creaElemento("button", "btn btn-outline-secondary btn-sm", azioni, "Segna come letto");
-            bottone.type = "button";
-            bottone.dataset.azione = "leggi";
-        }
-
-        const bottoneRimuovi = creaElemento("button", "btn btn-outline-secondary btn-sm", azioni, "Rimuovi");
-        bottoneRimuovi.type = "button";
-        bottoneRimuovi.dataset.azione = "rimuovi";
-
-        righe.push(li);
-    });
-
-    listaLibri.replaceChildren(...righe);
-    contatore.textContent = libri.length;
-
-    risultatiRicerca.querySelectorAll("button[data-titolo]").forEach((bottone) => {
-        const presente = libri.some((libro) =>
-            libro.titolo === bottone.dataset.titolo &&
-            libro.autore === bottone.dataset.autore &&
-            libro.anno === (Number(bottone.dataset.anno) || 0)
-        );
-
-        bottone.textContent = presente ? "✓ Aggiunto" : "Aggiungi";
-        bottone.disabled = presente;
-    });
-}
-
-// === Ricerca Open Library ===
-
-let controller;
-let timeoutId;
-
-function mostraSpinner() {
-    spinner.hidden = false;
-    errore.hidden = true;
-}
-
-function nascondiSpinner() {
-    spinner.hidden = true;
-}
-
-function mostraErrore(msg) {
-    errore.textContent = msg;
-    errore.hidden = false;
-}
-
-function cerca(query) {
-    controller?.abort();
-    controller = new AbortController();
-
-    const { signal } = controller;
-
-    mostraSpinner();
-
-    const url = new URL("https://openlibrary.org/search.json");
-
-    url.searchParams.set("q", query);
-    url.searchParams.set("limit", 10);
-
-    fetch(url, { signal })
-        .then((risposta) => {
-            if (!risposta.ok) {
-                throw new Error(`HTTP ${risposta.status}`);
-            }
-
-            return risposta.json();
-        })
-        .then((dati) => {
-            renderRisultati(dati.docs);
-        })
-        .catch((err) => {
-            if (err.name === "AbortError") return;
-
-            mostraErrore(`Errore durante la ricerca: ${err.message}`);
-        })
-        .finally(() => {
-            if (!signal.aborted) {
-                nascondiSpinner();
-            }
-        });
-}
-
-
-function renderRisultati(docs) {
-    const risultati = document.getElementById("risultati");
-    const libriConAutore = docs.filter((libro) =>
-        libro.author_name?.length > 0
-    );
-
-    if (libriConAutore.length === 0) {
-        const li = creaElemento("li", "", undefined, "Nessun risultato.");
-        risultati.replaceChildren(li);
-        return;
-    }
-
-    const righe = libriConAutore.map((libro) => {
-        const autore = libro.author_name?.[0] ?? "Autore sconosciuto";
-        const anno = libro.first_publish_year ?? "?";
-
-        const li = creaElemento("li", "risultato");
-
-        const info = creaElemento("div", "info", li);
-        creaElemento("strong", "", info, libro.title);
-        creaElemento("div", "meta", info, `${autore} — ${anno}`);
-
-        const bottone = creaElemento("button", "btn btn-success btn-sm", li, "Aggiungi");
-        bottone.type = "button";
-        bottone.dataset.titolo = libro.title;
-        bottone.dataset.autore = autore;
-        bottone.dataset.anno = anno;
-
-        const presente = libri.some((l) =>
-            l.titolo === libro.title &&
-            l.autore === autore &&
-            l.anno === (Number(anno) || 0)
-        );
-
-        bottone.textContent = presente ? "✓ Aggiunto" : "Aggiungi";
-        bottone.disabled = presente;
-
-        const dettagli = creaElemento("button", "btn btn-outline-primary btn-sm", li, "Dettagli");
-        dettagli.type = "button";
-        dettagli.dataset.key = libro.key;
-
-        return li;
-    });
-
-    risultati.replaceChildren(...righe);
-}
-
-
-// === Elementi DOM ===
-
-const dimensioneInput = document.getElementById("dimensioneMb");
-const formatoSelect = document.getElementById("formato");
-const campoDimensione = document.getElementById("campo-dimensione");
-const formAggiungiLibro = document.getElementById("aggiungi-libro");
-const listaLibri = document.getElementById("lista-libri");
-const svuotaTutto = document.getElementById("svuota-tutto");
-const durataInput = document.getElementById("durataMinuti");
-const campoDurata = document.getElementById("campo-durata");
-const esportaJSON = document.getElementById("esporta-json");
-const filtri = document.querySelector(".filtri");
-const ordinamentoSelect = document.getElementById("ordina-libri");
-const spinner = document.getElementById("spinner");
-const errore = document.getElementById("errore");
-const cercaInput = document.getElementById("cerca");
-const risultatiRicerca = document.getElementById("risultati");
 
 // === Eventi ===
 
@@ -379,7 +76,7 @@ formAggiungiLibro.addEventListener("submit", (e) => {
 
     libri.push(nuovoLibro);
     salvaLibri();
-    renderLibri();
+    aggiornaLista();
 
     e.target.reset();
     campoDimensione.hidden = true;
@@ -401,20 +98,19 @@ listaLibri.addEventListener("click", (e) => {
         libro.segnaComeLetto();
 
     } else if (azione === "rimuovi") {
-        libri = libri.filter((libro) => libro.getId() !== id);
+        setLibri(libri.filter((libro) => libro.getId() !== id));
 
     } else {
         return;
     }
 
     salvaLibri();
-    renderLibri();
+    aggiornaLista();
 });
 
 svuotaTutto.addEventListener("click", () => {
-    libri = [];
-    localStorage.removeItem(STORAGE_KEY);
-    renderLibri();
+    svuotaArchivio();
+    aggiornaLista();
 });
 
 
@@ -436,7 +132,7 @@ filtri.addEventListener("click", (e) => {
 
     if (!bottone) return;
 
-    filtroAttivo = bottone.dataset.filtro;
+    setFiltro(bottone.dataset.filtro);
 
     filtri.querySelectorAll("[data-filtro]").forEach((btn) => {
         const attivo = btn.dataset.filtro === filtroAttivo;
@@ -445,20 +141,19 @@ filtri.addEventListener("click", (e) => {
         btn.classList.toggle("btn-outline-secondary", !attivo);
     });
 
-    renderLibri();
+    aggiornaLista();
 });
 
 ordinamentoSelect.addEventListener("change", (e) => {
-    ordinamentoAttivo = e.target.value;
-    renderLibri();
+    setOrdinamento(e.target.value);
+    aggiornaLista();
 });
 
 
 cercaInput.addEventListener("input", (e) => {
     const query = e.target.value.trim();
 
-    clearTimeout(timeoutId);
-    controller?.abort();
+    annullaRicerca();
 
     risultatiRicerca.replaceChildren();
     errore.hidden = true;
@@ -469,37 +164,27 @@ cercaInput.addEventListener("input", (e) => {
         return;
     }
 
-    timeoutId = setTimeout(() => {
-        localStorage.setItem(RICERCA_KEY, query);
-        cerca(query);
-    }, 400);
+    pianificaRicerca(query);
 });
 
-risultatiRicerca.addEventListener("click", (e) => {
+risultatiRicerca.addEventListener("click", async (e) => {
 
     const bottoneDettagli = e.target.closest("button[data-key]");
 
     if (bottoneDettagli) {
         const url = `https://openlibrary.org${bottoneDettagli.dataset.key}.json`;
 
-        fetch(url)
-            .then((risposta) => {
-                if (!risposta.ok) {
-                    throw new Error(`HTTP ${risposta.status}`);
-                }
+        try {
+            const dati = await getJSON(url);
 
-                return risposta.json();
-            })
-            .then((dati) => {
-                const descrizione = typeof dati.description === "string"
-                    ? dati.description
-                    : dati.description?.value ?? "Nessuna descrizione disponibile.";
+            const descrizione = typeof dati.description === "string"
+                ? dati.description
+                : dati.description?.value ?? "Nessuna descrizione disponibile.";
 
-                alert(descrizione);
-            })
-            .catch((err) => {
-                alert(`Errore nel caricamento dei dettagli: ${err.message}`);
-            });
+            alert(descrizione);
+        } catch (err) {
+            alert(`Errore nel caricamento dei dettagli: ${err.message}`);
+        }
 
         return;
     }
@@ -526,7 +211,7 @@ risultatiRicerca.addEventListener("click", (e) => {
 
     libri.push(nuovoLibro);
     salvaLibri();
-    renderLibri();
+    aggiornaLista();
 
     bottone.textContent = "✓ Aggiunto";
     bottone.disabled = true;
@@ -535,11 +220,28 @@ risultatiRicerca.addEventListener("click", (e) => {
 
 // === Inizializzazione ===
 
-renderLibri();
+async function avvio() {
+    aggiornaLista();
 
-const ultimaRicerca = localStorage.getItem(RICERCA_KEY);
+    const ultimaRicerca = localStorage.getItem(RICERCA_KEY);
 
-if (ultimaRicerca) {
-    cercaInput.value = ultimaRicerca;
-    cerca(ultimaRicerca);
+    if (ultimaRicerca) {
+        cercaInput.value = ultimaRicerca;
+    }
+
+    const compiti = [];
+
+    if (getToken()) {
+        compiti.push(mostraProfilo());
+    }
+
+    if (ultimaRicerca) {
+        compiti.push(cerca(ultimaRicerca));
+    }
+
+    await Promise.allSettled(compiti);
+
+    renderAuthBox();
 }
+
+avvio();

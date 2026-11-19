@@ -1,0 +1,123 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Mini-libreria W7D4",
+    "collectionId": "20ed69f8-a382-4302-ae67-6f6c67dbc527",
+    "dateExported": "2026-11-19T22:16:17.991Z",
+    "version": "1.4",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a01380b5-399d-47cf-8a32-7b271b529676",
+            "colId": "20ed69f8-a382-4302-ae67-6f6c67dbc527",
+            "containerId": "",
+            "name": "1 - Login",
+            "url": "https://dummyjson.com/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2026-11-19T22:02:54.536Z",
+            "modified": "2026-11-19T22:02:54.536Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": [
+                    "{",
+                    "  \"username\": \"emilys\",",
+                    "  \"password\": \"emilyspass\"",
+                    "}"
+                ],
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.accessToken",
+                    "action": "setto",
+                    "value": "{{token}}"
+                }
+            ],
+            "docs": [
+                "Restituisce accessToken. Copia il valore nella variabile token dell'environment."
+            ]
+        },
+        {
+            "_id": "dc68f5f5-b32d-423e-be2f-e7ed513f3191",
+            "colId": "20ed69f8-a382-4302-ae67-6f6c67dbc527",
+            "containerId": "",
+            "name": "2 - Profilo (token valido)",
+            "url": "https://dummyjson.com/auth/me",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2026-11-19T22:02:54.539Z",
+            "modified": "2026-11-19T22:02:54.539Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer {{token}}"
+                }
+            ],
+            "docs": [
+                "200 con i dati utente. Prova che l'header Authorization funziona."
+            ]
+        },
+        {
+            "_id": "2fa5e1a7-f7a8-4208-869d-5106906b3cc5",
+            "colId": "20ed69f8-a382-4302-ae67-6f6c67dbc527",
+            "containerId": "",
+            "name": "3 - Profilo (token non valido)",
+            "url": "https://dummyjson.com/auth/me",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2026-11-19T22:02:54.540Z",
+            "modified": "2026-11-19T22:02:54.540Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer token-finto"
+                }
+            ],
+            "docs": [
+                "401 Unauthorized: e' il caso che nell'app fa scattare il logout automatico."
+            ]
+        },
+        {
+            "_id": "b9384712-832a-40e7-80de-10b6df8e50c4",
+            "colId": "20ed69f8-a382-4302-ae67-6f6c67dbc527",
+            "containerId": "",
+            "name": "4 - Ricerca Open Library",
+            "url": "https://openlibrary.org/search.json?q=tolkien&limit=10",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2026-11-19T22:02:54.541Z",
+            "modified": "2026-11-19T22:02:54.541Z",
+            "headers": [],
+            "params": [],
+            "tests": [],
+            "docs": [
+                "Stessa chiamata della funzione cerca()."
+            ]
+        },
+        {
+            "_id": "b1d5e5ef-4e5b-4f6a-a6b0-15a53509308b",
+            "colId": "20ed69f8-a382-4302-ae67-6f6c67dbc527",
+            "containerId": "",
+            "name": "5 - Dettagli opera",
+            "url": "https://openlibrary.org/works/OL27448W.json",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2026-11-19T22:02:54.542Z",
+            "modified": "2026-11-19T22:02:54.542Z",
+            "headers": [],
+            "params": [],
+            "tests": [],
+            "docs": [
+                "Stessa chiamata del bottone Dettagli."
+            ]
+        }
+    ],
+    "ref": "92FD3EHykEmV9NClex-ROMndITU1DTACgbdTy1fy308o2DmXa6JMMHUfJ6wogTQmiXF0SwkaGXg8YU3QwyxeAQ"
+}

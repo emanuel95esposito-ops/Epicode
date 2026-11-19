@@ -13,13 +13,24 @@
 
 <body>
 
-  <header class="site-header">
+  <header class="site-header sticky-top">
     <h1>La mia libreria</h1>
     <p>Aggiungi i tuoi libri e segnali come letti.</p>
   </header>
 
   <main class="container library-container py-4">
 
+    <section class="bg-white rounded shadow-sm p-4 mb-4">
+      <h2 class="h4 fw-bold mb-3">Area riservata</h2>
+
+      <div id="auth-box"></div>
+    </section>
+
+    <section id="profilo-section" class="bg-white rounded shadow-sm p-4 mb-4" hidden>
+      <h2 class="h4 fw-bold mb-3">Il tuo profilo</h2>
+
+      <div id="profilo-contenuto"></div>
+    </section>
 
     <section class="cerca-section bg-white rounded shadow-sm p-4 mb-4">
 
